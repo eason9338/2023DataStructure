@@ -26,10 +26,28 @@ body {
   align-items: center;
    
 }
-.search-box {
-  margin-top: 20px;
+
+
+.title {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 60px;
+  top: 200px;
+  color: #9296A1;
 }
 
+.search-input::placeholder {
+  color: #80868b;
+}
+.search-button {
+  background-color: #4285f4;
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 8px;
+}
 .search-bar {
   display: flex;
   justify-content: center;
@@ -39,8 +57,20 @@ body {
   border-radius: 20px;
   padding: 8px 15px;
 }
-
-.title {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 36px;
+.search-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #dfe1e5;
+  border-radius: 24px;
+  font-size: 16px;
+  outline: none;
+}
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 600px;
+  margin: 0 auto;
+}
+.search-container {
+  text-align: center;
 }
