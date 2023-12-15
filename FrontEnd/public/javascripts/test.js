@@ -2,7 +2,7 @@ function searchResult() {
     // 重定向到搜索结果介面
     window.location.href = '/searchResult';
 }
-document.getElementById('search-button').addEventListener('click', function(){
+document.querySelector('.search-button').addEventListener('click', function(){
     let input = document.getElementById("user-input").value;
     
     fetch('http://localhost:8080/add', {
