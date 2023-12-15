@@ -1,6 +1,6 @@
 
 a {
-  color: #D9DAE0;
+  color: #B0B0B5;
 }
 
 body {
@@ -17,7 +17,7 @@ body {
   text-align: center;
   width: 100%;
   min-height: 100vh;
-  background-image: linear-gradient(#EAF3F6,#D9DAE0);
+  background-image: linear-gradient(#EAF3F6,#B0B0B5);
   background-position: center;
   background-size: cover;
   display: flex;
