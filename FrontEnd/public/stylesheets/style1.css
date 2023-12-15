@@ -30,9 +30,10 @@ body {
 
 .title {
   font-family: 'Times New Roman', Times, serif;
-  font-size: 60px;
+  font-size: 50px;
   top: 200px;
-  color: #9296A1;
+  /*color: #9296A1;*/
+  color: #4285f4;
 }
 
 .search-input::placeholder {
