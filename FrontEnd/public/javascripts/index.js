@@ -3,7 +3,7 @@ function searchResult() {
     window.location.href = '/searchResult';
 }
 document.querySelector('.search-button').addEventListener('click', function(){
-    let input = document.getElementById("user-input").value;
+    let input = document.querySelector('.search-input').value;
     
     fetch('http://localhost:8080/add', {
         method: 'POST',
