@@ -1,3 +1,5 @@
+package com.datastructure2023.BackendPractice;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
