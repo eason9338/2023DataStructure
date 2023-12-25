@@ -5,8 +5,8 @@ public class Keyword {
   public float weight;
     
     public Keyword(String name, float weight){
-		this.name = name;
-		this.weight = weight;
+		  this.name = name;
+		  this.weight = weight;
     }
     
     @Override
@@ -26,7 +26,6 @@ public class Keyword {
 }
 
 // // ArrayList<Keyword> keywordList = new ArrayList<>();
-
 //         // Add keywords and their weights to the list
 //         keywordList.add(new Keyword(input, 0.9f));
 //         keywordList.add(new Keyword("實習", 0.9));
