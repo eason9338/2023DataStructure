@@ -1,12 +1,34 @@
 package com.datastructure2023.BackendPractice;
 
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@Component
 public class KeywordList {
 	private ArrayList<Keyword> lst;
 	
-	public KeywordList(){
+	public KeywordList() throws FileNotFoundException{
 		this.lst = new ArrayList<Keyword>();
+		File keywordFile = new File("../resources/Keyword.txt");
+		Scanner sc = new Scanner(keywordFile);
+
+		while(sc.hasNextLine()) {
+			String keywordName = sc.next();
+			float keywordWeight = sc.nextFloat();
+
+			Keyword newKeyword = new Keyword(keywordName, keywordWeight);
+			lst.add(newKeyword);
+
+		}
+
+		sc.close();
     }
 	
 	public void add(Keyword keyword){
@@ -16,6 +38,9 @@ public class KeywordList {
 	public ArrayList<Keyword> getKeywordsList(){
 		return this.lst;
 	}
+
+	
+
 	// //Quick sort
 	// public void sort(){
 	// 	if(lst.size() == 0)
