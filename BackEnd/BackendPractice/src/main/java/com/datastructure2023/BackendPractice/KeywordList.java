@@ -12,7 +12,10 @@ public class KeywordList {
 	public void add(Keyword keyword){
 		lst.add(keyword);
     }
-	
+
+	public ArrayList<Keyword> getKeywordsList(){
+		return this.lst;
+	}
 	// //Quick sort
 	// public void sort(){
 	// 	if(lst.size() == 0)
@@ -45,20 +48,11 @@ public class KeywordList {
 	// 	}
 	// }
 
-	private void swap(int aIndex, int bIndex){
-		Keyword temp = lst.get(aIndex);
-		lst.set(aIndex, lst.get(bIndex));
-		lst.set(bIndex, temp);
-	}
+	// private void swap(int aIndex, int bIndex){
+	// 	Keyword temp = lst.get(aIndex);
+	// 	lst.set(aIndex, lst.get(bIndex));
+	// 	lst.set(bIndex, temp);
+	// }
 	
-	public void output(){
-		StringBuilder sb = new StringBuilder();
-		
-		for(int i = 0; i < lst.size(); i++){
-			Keyword k = lst.get(i);
-			if(i > 0)sb.append(" ");
-			sb.append(k.toString());
-		}	
-		System.out.println(sb.toString());	
-	}
+	
 }
