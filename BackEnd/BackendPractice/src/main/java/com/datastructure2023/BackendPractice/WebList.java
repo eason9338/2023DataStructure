@@ -1,3 +1,5 @@
+package com.datastructure2023.BackendPractice;
+
 import java.util.List;
 
 public class WebList {
