@@ -32,14 +32,21 @@ body {
 
 .title {
   /*font-family: 'Livvic', Garamond, 'Times New Roman', Times, serif;*/
-  font-size: 50px;
+  font-size: 40px;
   top: 200px;
   /*color: #9296A1;*/
-  color: #ffffff;
+  color: #6FC3CB;
+}
+
+.title span.light{
+  display: inline-block;
+  color: #fff;
 }
 
 .search-input::placeholder {
-  color: #80868b;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: #036;
 }
 
 .search-button {
@@ -51,35 +58,33 @@ body {
   cursor: pointer;
   font-size: 16px;
   margin-left: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 這一行新增陰影效果 */
-  transition: box-shadow 0.3s ease; /* 這一行新增陰影變化的平滑過渡效果 */
 }
 
 .search-bar {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  border: 1px solid #ffffff;
+  gap: 5px;
   background-color: #ffffff;
-  border-radius: 20px;
-  padding: 8px 15px;
+  border-radius: 25px;
+  padding: 5px 10px;
 }
 
 .search-input {
   flex: 1;
   padding: 10px;
   border: 1px solid #dfe1e5;
+  width: 500px;
   border-radius: 24px;
   font-size: 16px;
   outline: none;
 }
 
-.search-bar {
+/*.search-bar {
   display: flex;
   align-items: center;
   width: 600px;
   margin: 0 auto;
-}
+}*/
 
 .search-container {
   text-align: center;
