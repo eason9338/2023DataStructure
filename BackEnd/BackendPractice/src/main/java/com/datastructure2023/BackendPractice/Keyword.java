@@ -5,8 +5,8 @@ public class Keyword {
   public float weight;
     
     public Keyword(String name, float weight){
-		  this.name = name;
-		  this.weight = weight;
+		this.name = name;
+		this.weight = weight;
     }
     
     @Override
@@ -25,8 +25,9 @@ public class Keyword {
     }
 }
 
-// // ArrayList<Keyword> keywordList = new ArrayList<>();
-//         // Add keywords and their weights to the list
+//        ArrayList<Keyword> keywordList = new ArrayList<>();
+
+//         //Add keywords and their weights to the list
 //         keywordList.add(new Keyword(input, 0.9f));
 //         keywordList.add(new Keyword("實習", 0.9));
 //         keywordList.add(new Keyword("實習生", 0.9));
@@ -42,8 +43,9 @@ public class Keyword {
 //         keywordList.add(new Keyword("不限年資", 0.6));
 //         keywordList.add(new Keyword("不需負擔管理責任", 0.8));
 //         keywordList.add(new Keyword("職缺", 0.9));
-//         keywordList.add(new Keyword("薪水", 0.5));
-//         keywordList.add(new Keyword("勞保", 0.5));
+//         keywordList.add(new Keyword("薪水", 0.3));
+//         keywordList.add(new Keyword("勞保", 0.3));
+//         keywordList.add(new Keyword("勞工保險", 0.3));
 //         keywordList.add(new Keyword("短期實習", 0.7));
 //         keywordList.add(new Keyword("面試", 0.6));
 //         keywordList.add(new Keyword("長期實習", 0.7));
