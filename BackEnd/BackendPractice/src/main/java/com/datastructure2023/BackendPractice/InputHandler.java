@@ -19,7 +19,7 @@ public class InputHandler {
         public String getInput() { return input; }
       
         /*
-        rootUrl是搜到的URL
+        rootUrl是input的URL
         String rootUrl = "https://example.com";
 
         // 創建 WebCrawler 並調用 crawlWebTree 方法

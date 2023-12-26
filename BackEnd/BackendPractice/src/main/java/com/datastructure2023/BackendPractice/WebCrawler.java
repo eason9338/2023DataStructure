@@ -45,7 +45,7 @@ public class WebCrawler {
                 // 檢查是否已經存在於列表中，且子網頁以"https://"開頭
                 String normalizedChildUrl = normalizeUrl(childUrl);
                 if (!containsUrl(allVisitedUrls, normalizedChildUrl) && normalizedChildUrl.startsWith("https://")) {
-                    // 如果不存在且子網頁以"https://"開頭，則创建WebPage对象并添加到List
+                    // 如果不存在且子網頁以"https://"開頭，則建WebPage並加到List
                     WebPage childPage = new WebPage(normalizedChildUrl);
                     allVisitedUrls.add(childPage);
 
@@ -60,7 +60,7 @@ public class WebCrawler {
     }
 
     private String normalizeUrl(String url) {
-        // 在這裡實現你的URL正規化邏輯，例如將協定轉換為小寫，移除末尾斜杠等
+        // 實現URL正規化邏輯，例如轉換為小寫，移除末尾斜杠等
         return url.toLowerCase().replaceAll("/$", "");
     }
 

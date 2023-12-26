@@ -14,9 +14,11 @@ public class WebPage {
          this.counter = new WordCounter(url);
      }
 
+	 //取得url
 	 public String getUrl(){
 		return this.url;
 	 }
+
      // setScore 方法用於設定分數
      public void setScore(ArrayList<Keyword> keywords) throws IOException {
          score = 0;
