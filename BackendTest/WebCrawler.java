@@ -34,7 +34,7 @@ public class WebCrawler {
             //正規化URL
             normalizeUrl(url);
 
-            // 透過日ahref取得所有網址
+            // 透過ahref取得所有網址
             Elements links = document.select("a[href]");
 
             // 把網址加到list中
