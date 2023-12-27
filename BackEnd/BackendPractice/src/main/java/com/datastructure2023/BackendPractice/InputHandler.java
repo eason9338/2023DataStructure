@@ -23,8 +23,7 @@ public class InputHandler {
         String rootUrl = "https://example.com";
 
         // 創建 WebCrawler 並調用 crawlWebTree 方法
-        WebCrawler webCrawler = new WebCrawler();
-        WebTree webTree = webCrawler.crawlWebTree(rootUrl);
+        S
 
         // 設定keywordlist
         ArrayList<Keyword> keywordList = new ArrayList<>();

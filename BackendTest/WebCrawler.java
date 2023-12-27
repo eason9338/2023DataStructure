@@ -8,21 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WebCrawler {
-    private static final int MAX_DEPTH = 0; // 設定最大爬取深度
+    private static final int MAX_DEPTH = 2; // 設定最大爬取深度
     private List<WebPage> allVisitedUrls;
 
     // 把url存入tree中
     public WebTree crawlWebTree(String url) {
-        List<WebPage> allVisitedUrls = new ArrayList<>();
-        crawlWebPages(url, 0, allVisitedUrls);
+        this.allVisitedUrls = new ArrayList<>();
+        crawlWebPages(url, 0);
 
         WebPage rootPage = new WebPage(url);
-        allVisitedUrls.add(rootPage);
+        this.allVisitedUrls.add(rootPage);
 
         return new WebTree(rootPage);
     }
 
-    private void crawlWebPages(String url, int depth, List<WebPage> allVisitedUrls) {
+    private void crawlWebPages(String url, int depth) {
         if (depth > MAX_DEPTH) {
             return; // 超過最大深度，停止爬取
         }
@@ -43,13 +43,13 @@ public class WebCrawler {
 
                 // 檢查是否已經存在於列表中，且子網頁以"https://"開頭
                 String normalizedChildUrl = normalizeUrl(childUrl);
-                if (!containsUrl(allVisitedUrls, normalizedChildUrl) && normalizedChildUrl.startsWith("https://")) {
+                if (!containsUrl(this.allVisitedUrls, normalizedChildUrl) && normalizedChildUrl.startsWith("https://")) {
                     // 如果不存在且子網頁以"https://"開頭，則建WebPage並加到List
                     WebPage childPage = new WebPage(normalizedChildUrl);
-                    allVisitedUrls.add(childPage);
+                    this.allVisitedUrls.add(childPage);
 
                     // 遞迴呼叫 crawlWebPages 方法取得子網頁的子網頁，深度加1
-                    crawlWebPages(childUrl, depth + 1, allVisitedUrls);
+                    crawlWebPages(childUrl, depth + 1);
                 }
             }
 
@@ -73,7 +73,7 @@ public class WebCrawler {
     }
 
     public void printList(){
-        for (WebPage page : allVisitedUrls) {
+        for (WebPage page : this.allVisitedUrls) {
             System.out.println(page.url);
         }
     }

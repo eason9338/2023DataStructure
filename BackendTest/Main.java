@@ -6,9 +6,13 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException{
-        WebPage rootPage = new WebPage("https://www.104.com.tw/jobs/main/");
-        WebTree tree = new WebTree(rootPage);
+        
+        String rootUrl = "https://career.104.com.tw/?utm_source=104&utm_medium=jobbank_home-header-tab";
+        
         ArrayList<Keyword> keywordList = new ArrayList<Keyword>();
+
+        WebCrawler webCrawler = new WebCrawler();
+        WebTree webTree = webCrawler.crawlWebTree(rootUrl);
 
         try {
             File file = new File("Keywords.txt");
@@ -24,7 +28,8 @@ public class Main {
             System.out.println("找不到文件");
         }
 
-        tree.setPostOrderScore(keywordList);
-        System.out.println(tree.eulerPrintTree());
+        webTree.setPostOrderScore(keywordList);
+        //System.out.println(webTree.eulerPrintTree());
+        webCrawler.printList();
     }
 }
