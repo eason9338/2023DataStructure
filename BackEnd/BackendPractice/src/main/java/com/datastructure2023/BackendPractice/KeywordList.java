@@ -22,6 +22,7 @@ public class KeywordList {
 		while(sc.hasNextLine()) {
 			String keywordName = sc.next();
 			float keywordWeight = sc.nextFloat();
+			Keyword newKeyword = new Keyword(keywordName, keywordWeight);
 
 			Keyword newKeyword = new Keyword(keywordName, keywordWeight);
 			lst.add(newKeyword);

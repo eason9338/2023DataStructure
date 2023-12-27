@@ -73,8 +73,8 @@ public class WebCrawler {
     }
 
     public void printList(){
-        for (String url : allVisitedUrls) {
-            System.out.println(url);
+        for (WebPage page : allVisitedUrls) {
+            System.out.println(page.url);
         }
     }
 }
