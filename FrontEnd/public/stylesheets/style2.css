@@ -11,7 +11,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     height: 100vh;
 }
 
@@ -22,7 +21,84 @@ body {
     display: flex;
 }
 
+.search-result-group {
+    position: relative;
+    display: inline-block;
+}
+
+.img, .search-result-group {
+    display: inline-block;
+    vertical-align: left;
+}
+
+#search-input {
+    padding-right: 40px;
+}
+
+.remove-button {
+    position: absolute;
+    top: 0;
+    right: 35px;  /* 調整按鈕的位置 */
+    height: 100%; /* 讓按鈕高度與輸入框一致 */
+    padding: 5px;
+    border:none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.search-button {
+    position: absolute;
+    top: 0;
+    right: 0px;  /* 調整按鈕的位置 */
+    height: 100%; /* 讓按鈕高度與輸入框一致 */
+    padding: 5px;
+    border:none;
+    background: transparent;
+    cursor: pointer;
+}
+
 .smallIcon{
     font-family: 'Livvic';
     justify-content: center;
 }
+
+.remove-button {
+    background-color: transparent;
+    color:#fff;
+    border: none;
+    border-radius: 24px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 16px;
+}
+
+.search-button {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 8px;
+  }
+  
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    background-color: #ffffff;
+    border-radius: 25px;
+    padding: 5px 10px;
+  }
+  
+  .search-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #dfe1e5;
+    width: 500px;
+    border-radius: 24px;
+    font-size: 16px;
+    outline: none;
+  }
