@@ -30,6 +30,11 @@ body {
    
 }
 
+.container img, .container h1{
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .title {
   /*font-family: 'Livvic', Garamond, 'Times New Roman', Times, serif;*/
   font-size: 40px;
