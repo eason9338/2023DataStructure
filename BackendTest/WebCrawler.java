@@ -89,6 +89,5 @@ public class WebCrawler {
             System.out.println(page.url);
         }
     }
-
     
 }

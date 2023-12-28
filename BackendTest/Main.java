@@ -5,8 +5,14 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Main {
+
     public static void main(String[] args) throws IOException {
+        
+        
         ArrayList<Keyword> keywordList = new ArrayList<Keyword>();
+
+       
+     
 
         try {
             File file = new File("Keywords.txt");
@@ -40,6 +46,8 @@ public class Main {
         System.out.println("Total Score: " + totalScore);
 
         // 打印網址列表
+        webTree.setPostOrderScore(keywordList);
+        //System.out.println(webTree.eulerPrintTree());
         webCrawler.printList();
     }
 }
