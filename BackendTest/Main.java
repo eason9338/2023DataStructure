@@ -7,12 +7,8 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        
-        
+        String rootUrl = "https://www.104.com.tw/jobs"; 
         ArrayList<Keyword> keywordList = new ArrayList<Keyword>();
-
-       
-     
 
         try {
             File file = new File("Keywords.txt");

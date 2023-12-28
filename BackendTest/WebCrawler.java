@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WebCrawler {
-    private static final int MAX_DEPTH = 0; // 設定最大爬取深度
-    private List<WebPage> allVisitedUrls; // 存放所有已訪問過的網址
+
     private WebTree webTree; // 儲存建立的網頁樹結構
+    private static final int MAX_DEPTH = 1; // 設定最大爬取深度
+    private List<WebPage> allVisitedUrls;
 
     // 創建 WebCrawler 實例時進行網站爬取，建立 WebTree
     public WebCrawler(String rootUrl) {
