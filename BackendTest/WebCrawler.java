@@ -4,6 +4,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,13 +18,19 @@ public class WebCrawler {
     // 創建 WebCrawler 實例時進行網站爬取，建立 WebTree
     public WebCrawler(String rootUrl) {
         this.allVisitedUrls = new ArrayList<>();
-        crawlWebPages(rootUrl, 0); // 開始進行網頁爬取
 
         WebPage rootPage = new WebPage(rootUrl);
+        
+        // 檢查是否已經存在於列表中，有的話先刪除
+        String normalizedRootUrl = normalizeUrl(rootUrl);
+        allVisitedUrls.removeIf(page -> normalizeUrl(page.getUrl()).equals(normalizedRootUrl));
+
         this.allVisitedUrls.add(rootPage);
+        crawlWebPages(rootUrl, 0); // 開始進行網頁爬取
 
         this.webTree = buildWebTree(rootPage);
     }
+
 
     // 獲取 WebTree 
     public WebTree getWebTree() {
@@ -71,8 +79,16 @@ public class WebCrawler {
 
     // 正規化 URL 的方法
     private String normalizeUrl(String url) {
-        return url.toLowerCase().replaceAll("/$", "");
+        try {
+            URL normalizedUrl = new URL(url);
+            String path = normalizedUrl.getPath().endsWith("/") ? normalizedUrl.getPath() : normalizedUrl.getPath() + "/";
+            return normalizedUrl.getProtocol() + "://" + normalizedUrl.getHost() + path;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            return url.toLowerCase().replaceAll("/$", "");
+        }
     }
+
 
     // 檢查網址是否已經存在於列表中的方法
     private boolean containsUrl(List<WebPage> pages, String url) {

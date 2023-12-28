@@ -21,7 +21,7 @@ public class GoogleQuery {
         HttpURLConnection connection = (HttpURLConnection)url.openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
-        System.out.println("網址連結：" + urlString);
+        // System.out.println("網址連結：" + urlString);
         int responseCode = connection.getResponseCode();
         if(responseCode == 200) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
