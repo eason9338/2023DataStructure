@@ -16,44 +16,28 @@
 
             <p>實習類型</p>
             <div class="search-box">
-                <input type="text" class="search-input-type" placeholder = "搜尋或輸入網址">            
+                <input type="text" class="search-input" placeholder = "輸入實習類型">            
             </div>
 
             <p>實習地區</p>
             <div class="search-box">
-                <select id="search-input-region" onchange="handleRegionchange()">
+                <select id="search-input" onchange="handleRegionchange()">
                     <option value="" disabled selected>選擇縣市</option>
                     <option value="north">北部</option>
-                    <option value="north">中部</option>
-                    <option value="north">南部</option>
-                    <option value="north">東部</option>
-                    <option value="north">離島</option>
-                    <!--<optgroup label="北部">
-                        <option value="taipei">台北市</option>
-                        <option value="new-taipei">新北市</option>
-                    </optgroup>
-                    <optgroup label="中部">
-                        <option value="taichung">台中市</option>
-                        <option value="changhua">彰化縣</option>
-                    </optgroup>
-                    <optgroup label="南部">
-                        <option value="tainan">台南市</option>
-                        <option value="kaohsung">高雄市</option>
-                    </optgroup>
-                    <optgroup label="東部">
-                        <option value="yilan">宜蘭市</option>
-                        <option value="hualian">花蓮市</option>
-                    </optgroup>-->
+                    <option value="central">中部</option>
+                    <option value="south">南部</option>
+                    <option value="east">東部</option>
+                    <option value="islands">離島</option>
                 </select>
                 <select id="districtSelect">
                     <option value="" disabled selected>chooooose</option>
                 </select>
             </div>
-            <p>期待薪資(month)</p>
+            <p>期待時薪</p>
             <div class="search-box">
-                <input type="number" id="minSalary" placeholder="最低薪資">
+                <input type="number" class="search-input" placeholder="最低薪資">
                 <label for="range"> ~ </label>
-                <input type="number" id="maxSalary" placeholder="最高薪資">
+                <input type="number" class="search-input" placeholder="最高薪資">
             </div>
             <br>
             <button class="search-button" onclick="searchResult()">搜尋</button>    
