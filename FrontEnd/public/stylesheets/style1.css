@@ -1,23 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Livvic:wght@700&display=swap');
 
 a {
   color: #B0B0B5;
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Livvic';
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /*align-items: center;*/
   justify-content: center;
   height: 100vh;
 }
-.container {
+
+/*.container {
   text-align: center;
   width: 100%;
   min-height: 100vh;
-  background-image: linear-gradient(#EAF3F6,#B0B0B5);
+  background-color: #036;
   background-position: center;
   background-size: cover;
   display: flex;
@@ -25,22 +27,46 @@ body {
   justify-content: center;
   align-items: center;
    
+}*/
+
+.left-panel {
+  width: 50%;
+  min-height: 100vh;
+  background-color: #003366;
+  padding: 20px;
+  color: #fff;
+  box-sizing: border-box;
 }
 
+.container img, .container h1{
+  display: inline-block;
+  vertical-align: middle;
+}
 
 .title {
-  font-family: Garamond, 'Times New Roman', Times, serif;
-  font-size: 50px;
+  font-family: 'Livvic', Garamond, 'Times New Roman', Times, serif;
+  font-size: 25px;
   top: 200px;
-  /*color: #9296A1;*/
-  color: #4285f4;
+  color: #6FC3CB;
+}
+
+.title span.light{
+  display: inline-block;
+  color: #fff;
+}
+
+.p {
+  font-family: 'Livvic';
 }
 
 .search-input::placeholder {
-  color: #80868b;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: #036;
 }
+
 .search-button {
-  background-color: #4285f4;
+  background-color: transparent;
   color: #fff;
   border: none;
   border-radius: 24px;
@@ -49,29 +75,26 @@ body {
   font-size: 16px;
   margin-left: 8px;
 }
-.search-bar {
+
+.search-box {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  border: 1px solid #ffffff;
+  gap: 5px;
   background-color: #ffffff;
-  border-radius: 20px;
-  padding: 8px 15px;
+  border-radius: 25px;
+  padding: 5px 10px;
 }
+
 .search-input {
   flex: 1;
   padding: 10px;
   border: 1px solid #dfe1e5;
+  width: 500px;
   border-radius: 24px;
   font-size: 16px;
   outline: none;
 }
-.search-bar {
-  display: flex;
-  align-items: center;
-  width: 600px;
-  margin: 0 auto;
-}
+
 .search-container {
   text-align: center;
 }

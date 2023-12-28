@@ -16,48 +16,47 @@ public class WordCounter {
 
     //將 URL 轉為String
     private String fetchContent() throws IOException {
-        URL url = new URL(this.urlStr); 
-        URLConnection conn = url.openConnection(); 
-        InputStream in = conn.getInputStream(); 
-        BufferedReader br = new BufferedReader(new InputStreamReader(in)); 
-        StringBuilder retVal = new StringBuilder(); 
-
+        URL url = new URL(this.urlStr);
+        URLConnection conn = url.openConnection();
+        InputStream in = conn.getInputStream();
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
+        StringBuilder retVal = new StringBuilder();
+    
         String line;
-
+    
         while ((line = br.readLine()) != null) {
             retVal.append(line).append("\n");
         }
-
-        return retVal.toString(); 
+        return retVal.toString();
     }
+    
 
     //計算指定關鍵字在 URL 內容中出現的次數
     public int countKeyword(String keyword) throws IOException {
-        if (content == null) {
-            content = fetchContent(); //以防沒有抓到內容
-        }
+        if (content == null){
+		    content = fetchContent();
+		}
 
         content = content.toUpperCase(); 
         keyword = keyword.toUpperCase(); 
 
-        int retVal = boyerMoore(content, keyword); // 使用 Boyer-Moore 來計算關鍵字出現次數
+        int retVal = BoyerMoore(content, keyword); // 使用 Boyer-Moore 來計算關鍵字出現次數
 
         return retVal; 
     }
 
     // Boyer-Moore 
-    public int boyerMoore(String T, String P) {
+    public int BoyerMoore(String T, String P){
         int i = P.length() - 1;
         int j = P.length() - 1;
         int l = 0;
         int matchCount = 0;
-
-
-        while (i < T.length() - 1) {
-            if (T.charAt(i) == P.charAt(j)) {
-                if (j == 0) {
+    
+        while(i < T.length()) {
+            if(T.charAt(i) == P.charAt(j)) {
+                if(j == 0) {
                     matchCount++;
-                    i = i + P.length();
+                    i = i + 1; 
                 } else {
                     i--;
                     j--;
@@ -68,32 +67,34 @@ public class WordCounter {
                 j = P.length() - 1;
             }
         }
-
-        if (matchCount > 0) {
+        if(matchCount > 0) {
             return matchCount;
         } else {
-            return -1;
+            return 0;
         }
     }
+    
 
-    private int last(char c, String P) {
-        int lastIndex = -1;
+    public int last(char c, String P) {
+        int lastIndex = -1; 
         int index = P.indexOf(c);
 
         while (index != -1) {
-            lastIndex = index;
+            lastIndex = index; 
             index = P.indexOf(c, index + 1);
         }
 
-        return lastIndex; 
+        return lastIndex;
     }
 
-    private int min(int a, int b) {
+    public int min(int a, int b){
         if (a < b)
             return a;
         else if (b < a)
             return b;
-        else
+        else 
             return a;
     }
+
+   
 }

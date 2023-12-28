@@ -7,7 +7,8 @@
     <title>搜尋結果</title>
 </head>
 <body>
-    <div class="container">
+    <!-- 原本的頁面 -->
+    <!-- <div class="container">
         <div class="title">
             <h1 id="project-title">搜尋結果</h1>
         </div>
@@ -17,88 +18,37 @@
             <button class="remove-button" onclick="clearSearch()"><img src="../picture/remove-removebg.png" alt="清除" width=20px height=20px></button>
             <button class="search-button" onclick="searchResult()"><img src="../picture/search-removebg.png" alt="搜尋" width=20px height=20px></button>
         </div>
+    </div> -->
+
+    <class="headBar">
+        <div class="smallIcon">
+            <img src="../picture/small-icon-rmbg.png" alt="small-icon" width=150px height=150px>
+            <div class="search-result-group">
+                <input type="text" class="search-input" placeholder="搜尋或輸入網址">
+                <button class="remove-button" onclick="clearSearch()"><img src="../picture/remove-rmbg.png" alt="清除" width=20px height=20px></button>
+                <button class="search-button" onclick="searchResult()"><img src="../picture/search-rmbg.png" alt="搜尋" width=20px height=20px></button>
+            </div>
+        </div>
     </div>
-    <script src = "javascripts/searchRst.js"></script>
+
+    <!-- Figma 的套件生成的，沒有很準確 -->
+    <!--<div style="width: 1440px; height: 1024px; position: relative; background: white; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
+        <div class="Frame1" style="width: 1440px; height: 211px; position: relative; background: #003366">
+          <div class="Group1" style="width: 896px; height: 96px; left: 272px; top: 66px; position: absolute">
+            <div class="Rectangle1" style="width: 896px; height: 96px; left: 0px; top: 0px; position: absolute; background: white; border-radius: 32px"></div>
+            <img class="RemoveRemovebg1" style="width: 35px; height: 35px; left: 763px; top: 31px; position: absolute" src="https://via.placeholder.com/35x35" />
+            <div style="width: 267px; height: 51px; left: 30px; top: 23px; position: absolute; color: #003366; font-size: 30px; font-family: Literata; font-weight: 400; word-wrap: break-word">搜尋結果</div>
+          </div>
+          <div class="Line1" style="width: 1350px; height: 0px; left: 51px; top: 211px; position: absolute; border: 1px black solid"></div>
+          <div class="Icon" style="width: 127px; height: 127px; left: 81px; top: 51px; position: absolute; background: rgba(255, 255, 255, 0)">
+            <div class="Ellipse1" style="width: 127px; height: 127px; left: 0px; top: 0px; position: absolute; background: white; border-radius: 9999px"></div>
+            <div class="In" style="left: 31px; top: 24px; position: absolute; color: #003366; font-size: 63.29px; font-family: Livvic; font-weight: 700; word-wrap: break-word">iN</div>
+          </div>
+          <div class="Ellipse2" style="width: 73px; height: 73px; left: 1083px; top: 78px; position: absolute"></div>
+          <img class="1RemovebgPreview1" style="width: 62px; height: 62px; left: 1089px; top: 83px; position: absolute" src="https://via.placeholder.com/62x62" />
+        </div>
+        <div style="width: 896px; height: 96px; position: relative"></div>
+      </div>
+    <script src = "javascripts/searchResult.js"></script>
 </body>
-</html> -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Search Page</title>
-    <body>
-
-        <div id="logo">
-            <!-- Your logo here -->
-            <h1>這裡要放圖片</h1>
-        </div>
-        
-        <div class="search-container">
-            <input type="text" class="search-bar" placeholder="Search...">
-            <button class="search-button">Search</button>
-        </div>
-        
-        <div class="results">
-            <div class="result-item">
-                <h2><a href="#">文章一 政政小廚師好難吃</a></h2>
-                <p>2 天前 — 今天開幕了但目前都沒有人在校版討論的樣子，剛剛晚餐去吃了蝦仁飯，想卡其他的怎麼樣 ，（在指南路上，大概小木屋的對面）， 蝦仁飯$120 ...</p>
-            </div>
-            <div class="result-item">
-                <h2><a href="#">文章二 新莊人氣排隊小吃！瓜子肉飯配半熟蛋超下飯老闆竟是「大 ...</a></h2>
-                <p>2023年9月17日 — 「一甲子私房小廚」掌廚人是大飯店退休主廚，不少老饕和知名企業家，早就是他的粉絲，所以就算才剛開幕，熟客、新客都絡繹不絕，電話訂單更是接到手軟！...</p>
-            </div>
-            <div class="result-item">
-                <h2><a href="#">文章三 秋天吃蟹！高雄異國鮮味大比拼西班牙私廚讓你秒成蟹膏富翁</a></h2>
-                <p>【臺北報導】臺北市政府教育局為響應食農教育政策，特別於暑假期間在中華穀類食品工業技術研究所辦理「小小廚神體驗營」，以國產雜糧為主題，搭配實作帶領學生體驗下廚， ...</p>
-            </div>
-        </div>
-        
-        </body>
-    <style>
-        /* Add your CSS styling here */
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, lightblue, white);
-        }
-        #logo {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .search-container {
-            text-align: center;
-            margin-top: 50px;
-        }
-        .search-bar {
-            width: 50%;
-            padding: 10px;
-            font-size: 16px;
-        }
-        .search-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            margin-left: 10px;
-        }
-        .results {
-            margin-top: 20px;
-            /* margin-left:250px; */
-            padding: 0 20%;
-            
-        }
-        .result-item {
-            background: #f9f9f9;
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            width: 700px;
-        }
-        .result-item a {
-            text-decoration: none;
-            color: green;
-        }
-        .result-item p {
-            color: #333;
-        }
-    </style>
-</head>
-
 </html>
