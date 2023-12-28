@@ -11,6 +11,7 @@ public class WebNode {
     public WebNode(WebPage webPage) {
         this.webPage = webPage;
         this.children = new ArrayList<WebNode>();
+        
     }
 
     // 根據關鍵字列表計算節點分數
@@ -19,6 +20,7 @@ public class WebNode {
 		// 根據關鍵字設定相關網頁的分數
         webPage.setScore(keywords);
         nodeScore = webPage.score;
+        
 
         // 把子網頁的分數做統計，計算整個網頁的總分
         for (WebNode w : children) {

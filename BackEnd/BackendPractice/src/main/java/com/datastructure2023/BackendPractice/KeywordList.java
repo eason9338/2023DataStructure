@@ -24,7 +24,7 @@ public class KeywordList {
 			float keywordWeight = sc.nextFloat();
 			Keyword newKeyword = new Keyword(keywordName, keywordWeight);
 
-			Keyword newKeyword = new Keyword(keywordName, keywordWeight);
+			//Keyword newKeyword = new Keyword(keywordName, keywordWeight);
 			lst.add(newKeyword);
 
 		}

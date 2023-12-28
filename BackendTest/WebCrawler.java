@@ -9,47 +9,45 @@ import java.util.List;
 
 public class WebCrawler {
     private static final int MAX_DEPTH = 0; // 設定最大爬取深度
-    private List<WebPage> allVisitedUrls;
+    private List<WebPage> allVisitedUrls; // 存放所有已訪問過的網址
+    private WebTree webTree; // 儲存建立的網頁樹結構
 
-    // 把url存入tree中
-    public WebTree crawlWebTree(String url) {
-        List<WebPage> allVisitedUrls = new ArrayList<>();
-        crawlWebPages(url, 0, allVisitedUrls);
+    // 創建 WebCrawler 實例時進行網站爬取，建立 WebTree
+    public WebCrawler(String rootUrl) {
+        this.allVisitedUrls = new ArrayList<>();
+        crawlWebPages(rootUrl, 0); // 開始進行網頁爬取
 
-        WebPage rootPage = new WebPage(url);
-        allVisitedUrls.add(rootPage);
+        WebPage rootPage = new WebPage(rootUrl);
+        this.allVisitedUrls.add(rootPage);
 
-        return new WebTree(rootPage);
+        this.webTree = buildWebTree(rootPage);
     }
 
-    private void crawlWebPages(String url, int depth, List<WebPage> allVisitedUrls) {
+    // 獲取 WebTree 
+    public WebTree getWebTree() {
+        return webTree;
+    }
+
+    // 遞迴爬取網頁鏈接的方法
+    private void crawlWebPages(String url, int depth) {
         if (depth > MAX_DEPTH) {
             return; // 超過最大深度，停止爬取
         }
 
         try {
-            // 透過 Jsoup 取得網頁的 Document 物件
             Document document = Jsoup.connect(url).get();
-
-            //正規化URL
             normalizeUrl(url);
 
-            // 透過ahref取得所有網址
             Elements links = document.select("a[href]");
 
-            // 把網址加到list中
             for (Element link : links) {
-                String childUrl = link.attr("abs:href"); // 取得絕對路徑的連結
-
-                // 檢查是否已經存在於列表中，且子網頁以"https://"開頭
+                String childUrl = link.attr("abs:href");
                 String normalizedChildUrl = normalizeUrl(childUrl);
+                // 檢查是否已經存在於列表中，且子網頁以 "https://" 開頭
                 if (!containsUrl(allVisitedUrls, normalizedChildUrl) && normalizedChildUrl.startsWith("https://")) {
-                    // 如果不存在且子網頁以"https://"開頭，則建WebPage並加到List
                     WebPage childPage = new WebPage(normalizedChildUrl);
                     allVisitedUrls.add(childPage);
-
-                    // 遞迴呼叫 crawlWebPages 方法取得子網頁的子網頁，深度加1
-                    crawlWebPages(childUrl, depth + 1, allVisitedUrls);
+                    crawlWebPages(childUrl, depth + 1);
                 }
             }
 
@@ -58,11 +56,24 @@ public class WebCrawler {
         }
     }
 
+    // 建立 WebTree 的方法
+    private WebTree buildWebTree(WebPage rootPage) {
+        WebTree tree = new WebTree(rootPage);
+
+        for (WebPage crawledPage : allVisitedUrls) {
+            if (!crawledPage.getUrl().equals(rootPage.getUrl())) {
+                tree.root.addChild(new WebNode(crawledPage));
+            }
+        }
+        return tree;
+    }
+
+    // 正規化 URL 的方法
     private String normalizeUrl(String url) {
-        // 實現URL正規化邏輯，例如轉換為小寫，移除末尾斜杠等
         return url.toLowerCase().replaceAll("/$", "");
     }
 
+    // 檢查網址是否已經存在於列表中的方法
     private boolean containsUrl(List<WebPage> pages, String url) {
         for (WebPage page : pages) {
             if (page.getUrl().equals(url)) {
@@ -72,9 +83,12 @@ public class WebCrawler {
         return false;
     }
 
-    public void printList(){
+    // 打印所有訪問過的網址的方法
+    public void printList() {
         for (WebPage page : allVisitedUrls) {
             System.out.println(page.url);
         }
     }
+
+    
 }
