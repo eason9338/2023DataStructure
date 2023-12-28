@@ -21,9 +21,14 @@
 
             <p>實習地區</p>
             <div class="search-box">
-                <select id="search-input-area">
-                    <option value="" disabled selected>choose</option>
-                    <optgroup label="北部">
+                <select id="search-input-region" onchange="handleRegionchange()">
+                    <option value="" disabled selected>選擇縣市</option>
+                    <option value="north">北部</option>
+                    <option value="north">中部</option>
+                    <option value="north">南部</option>
+                    <option value="north">東部</option>
+                    <option value="north">離島</option>
+                    <!--<optgroup label="北部">
                         <option value="taipei">台北市</option>
                         <option value="new-taipei">新北市</option>
                     </optgroup>
@@ -38,7 +43,7 @@
                     <optgroup label="東部">
                         <option value="yilan">宜蘭市</option>
                         <option value="hualian">花蓮市</option>
-                    </optgroup>
+                    </optgroup>-->
                 </select>
                 <select id="districtSelect">
                     <option value="" disabled selected>chooooose</option>
@@ -46,12 +51,12 @@
             </div>
             <p>期待薪資(month)</p>
             <div class="search-box">
-                <label for="minSalary">最低薪資:</label>
                 <input type="number" id="minSalary" placeholder="最低薪資">
-                <label for="maxSalary">最高薪資:</label>
+                <label for="range"> ~ </label>
                 <input type="number" id="maxSalary" placeholder="最高薪資">
             </div>
-            <button class="search-button" onclick="searchResult()"><img src="../picture/search-rmbg.png" alt="搜尋" width=30px height=30px></button>    
+            <br>
+            <button class="search-button" onclick="searchResult()">搜尋</button>    
         </div>
         <div class="right-panel">
 
