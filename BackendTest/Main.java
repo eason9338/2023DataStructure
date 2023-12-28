@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        // String rootUrl = "http://soslab.nccu.edu.tw/Courses.html"; 
+        // String rootUrl = "https://www.104.com.tw/jobs/main/"; 
         // ArrayList<Keyword> keywordList = new ArrayList<Keyword>();
 
         // try {
@@ -38,14 +38,16 @@ public class Main {
         // }
 
         // // 獲取計算後的總分
-        // double totalScore = webTree.getTotalScore();
+        // double totalScore = Math.round(webTree.getTotalScore()* 10.0) / 10.0;
         // System.out.println("Total Score: " + totalScore);
 
         // // 打印網址列表
         // webTree.setPostOrderScore(keywordList);
         // //System.out.println(webTree.eulerPrintTree());
         // webCrawler.printList();
-
+        
+        //上面的部分output會是Total Score: 1.2
+        //https://www.104.com.tw/jobs/main/
 
         //google api執行爬蟲部分，By 李淳澔，要上面功能救註解掉下面的
         SearchResultHandler searchResultHandler = new SearchResultHandler("AIzaSyDaMRJAuiClBmf_TatB_3PMtsKqiRt18XM", "e618816a42f6949e9");
