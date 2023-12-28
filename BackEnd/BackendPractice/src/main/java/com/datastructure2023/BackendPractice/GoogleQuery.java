@@ -88,7 +88,7 @@ public class GoogleQuery
 
 			} catch (IndexOutOfBoundsException e) 
 			{
-//				e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 		return retVal;
