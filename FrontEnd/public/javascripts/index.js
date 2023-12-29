@@ -3,21 +3,34 @@ function searchResult() {
     window.location.href = '/searchResult';
 }
 
-/*document.querySelectorAll('.search-input').forEach(function(input) {
-    input.addEventListener('click', function() {
-        document.querySelector('.search-box').classList.add('input-clicked');
-    });
-});*/
+document.getElementById('region').addEventListener('change', handleRegionChange);
 
 function handleRegionChange() {
+    var regionSelect = document.getElementById('region');
+    var selectedRegion = regionSelect.value;
+    
+    /*city.innerHTML = "";
     // 獲取選擇縣市的值
-    var selectedRegion = document.getElementById('region');
-    var selectedCity = document.getElementById('city');
-    var option = new Option("");
+    var region = document.getElementById('region');
+    var city = document.getElementById('city');
+    var option = new Option("", "");
     region.options.add(option);
+    var selectedRegionIndex = region.selectedIdex;
+
+    //如果選擇地區會添加相對應的城市
+    if(selectedRegionIndex > 0) {
+        var cityList = regionList[selectedRegionIndex - 1].cityList;
+        for(var i = 0; i < cityList.length; i++){
+            var option = new Option(cityList[i], cityList[i]);
+            city.add(option);
+        }
+    }
+
+    document.getElementById('region').onchange = handleRegionChange;
   
     // 根據選擇的縣市，動態添加相應的區域選項
-    var regionList=[{
+    var regionList=[
+        {
         name:"北部",
             cityList:["台北市","新北市","基隆市","桃園市","新竹市", "新竹縣"]
         },
@@ -35,53 +48,64 @@ function handleRegionChange() {
         }
     ];
 
-    for(var i = 0; i < regionList.length; i++){
-        var option = new Option(regionList[i].name, )
-    } 
+    /*for(var i = 0; i < regionList.length; i++){
+        var option = new Option(regionList[i].name);
+        region.options.add(option);
+    } */
 
-    /*switch (selectedRegion) {
+    switch (selectedRegion) {
       case 'north':
-        addDistrictOption('台北市');
-        addDistrictOption('新北市');
-        addDistrictOption('基隆市');
-        addDistrictOption('桃園市');
-        addDistrictOption('新竹市');
-        addDistrictOption('新竹縣');
+        addCityOption('台北市');
+        addCityOption('新北市');
+        addCityOption('基隆市');
+        addCityOption('桃園市');
+        addCityOption('新竹市');
+        addCityOption('新竹縣');
         break;
       case 'central':
-        addDistrictOption('台中市');
-        addDistrictOption('彰化縣');
-        addDistrictOption('南投縣');
-        addDistrictOption('雲林縣');
+        addCityOption('台中市');
+        addCityOption('彰化縣');
+        addCityOption('南投縣');
+        addCityOption('雲林縣');
         break;
       case 'south':
-        addDistrictOption('台南市');
-        addDistrictOption('高雄市');
-        addDistrictOption('屏東縣');
-        addDistrictOption('澎湖縣');
+        addCityOption('台南市');
+        addCityOption('高雄市');
+        addCityOption('屏東縣');
         break;
       case 'east':
-        addDistrictOption('宜蘭縣');
-        addDistrictOption('花蓮縣');
-        addDistrictOption('台東縣');
+        addCityOption('宜蘭縣');
+        addCityOption('花蓮縣');
+        addCityOption('台東縣');
         break;
       case 'islands':
-        addDistrictOption('金門縣');
-        addDistrictOption('馬祖列島');
+        addCityOption('澎湖縣');
+        addCityOption('金門縣');
+        addCityOption('馬祖列島');
         break;
-      //default:
-        // 如果未選擇縣市，不添加任何區域選項
-        //break;
+      default:
+        // 如果沒有選擇縣市，則不添加任何區域選項
+        break;
     }
 }
-  
-function addDistrictOption(districtName) {
-    var districtSelect = document.getElementById('districtSelect');
-    var option = document.createElement('option');
-    option.value = districtName;
-    option.textContent = districtName;
-    districtSelect.appendChild(option);
+
+/*function changeCity() {
+    cityList.length = 0;
+    var cityList = regionList[region.selectedIdex].cityList;
+    for(var i = 0; i < cityList.length; i ++){
+        var option = new Option(cityList[i].name);
+        cityList.options.add(option);
+    }
+    document.getElementById('city').onchange = changeCity;
 }*/
+  
+function addCityOption(city) {
+    var citySelect = document.getElementById('city');
+    var option = document.createElement('option');
+    option.value = city;
+    option.textContent = city;
+    citySelect.appendChild(option);
+}
   
 document.querySelector('.search-button').addEventListener('click', function(){
     let input = document.querySelector('.search-input').value;
