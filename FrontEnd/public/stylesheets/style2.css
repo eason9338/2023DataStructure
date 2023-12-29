@@ -20,7 +20,7 @@ body {
     width: 100%;
     /*background-color: rgba(97, 97, 99, 0.5);*/
 
-    background-color: rgba(15, 26, 36, 0.55);
+    background-color: rgb(13, 29, 44);
     display: flex;
     height: 100px;
     align-items: center; 
@@ -49,45 +49,78 @@ body {
 
 .search-input {
     flex-grow: 1; 
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #dfe1e5;
-    width: 300px;
+    width: 100px;
     height: 20px;
     border-radius: 25px;
     font-size: 16px;
     outline: none;
-    margin: 10px;
-  }
-  .searchMny-input{
+}
+
+.search-input-type {
     flex-grow: 1; 
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #dfe1e5;
-    /* width: 150px; */
-    height: 5px;
+    width: 250px;
+    height: 20px;
     border-radius: 25px;
     font-size: 16px;
     outline: none;
-    margin: 10px;
-  } 
+}
 
-  .search-money{
-    margin: 10px;
+.search-input option {
+    flex-grow: 1; 
+    padding: 5px;
+    border: 1px solid #dfe1e5;
+    width: 100px;
+    height: 20px;
     border-radius: 25px;
-    background-color: #ffffff;
-    width: 450px;
-    display: flex;
-  }
- 
+    font-size: 12px;
+    outline: none;
+}
+
+.search-input::placeholder {
+    font-family: sans-serif;
+    font-weight:500;
+    font-size: 14px;
+    color: rgb(147, 147, 147);
+}
+
+.search-input-type::placeholder {
+    font-family: sans-serif;
+    font-weight:500;
+    font-size: 14px;
+    color: rgb(147, 147, 147);
+}
   
 .search-box {
-    border: 1px solid #dfe1e5;
+    /*border: 1px solid #dfe1e5;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    background-color: #ffffff;
+    border-radius: 25px;
+    padding: 2px;
+    margin-right: 10px;*/
     display: flex;
     justify-content: center;
     gap: 5px;
     background-color: #ffffff;
     border-radius: 25px;
-    padding: 10px;
-  }
+    padding: 5px 10px;
+    margin-right: 10px;
+}
+
+.search-box select {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    background-color: #ffffff;
+    border-radius: 25px;
+    padding: 10px 10px;
+}
+
 .results {
     margin-top: 100px;
     margin-left: 350px;
@@ -104,7 +137,7 @@ body {
 }
 .result-item a {
     text-decoration: none;
-    color: rgb(3, 106, 3);
+    color: rgb(29, 113, 196);
 }
 .result-item p {
     color: #333;
