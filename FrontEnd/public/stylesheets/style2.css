@@ -87,7 +87,7 @@ body {
     color: rgb(147, 147, 147);
 }
 
-.search-input-type::placeholder {
+.search-input::placeholder {
     font-family: sans-serif;
     font-weight:500;
     font-size: 14px;
@@ -123,18 +123,19 @@ body {
 
 .results {
     margin-top: 100px;
-    margin-left: 350px;
-    align-items: center;
-    width: 700px;
- 
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px; 
 }
+
 .result-item {
     background: #e6e5e5;
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 5px;
- 
+    width: 100%;
 }
+
 .result-item a {
     text-decoration: none;
     color: rgb(29, 113, 196);
