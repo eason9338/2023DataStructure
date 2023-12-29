@@ -3,17 +3,43 @@ function searchResult() {
     window.location.href = '/searchResult';
 }
 
+/*document.querySelectorAll('.search-input').forEach(function(input) {
+    input.addEventListener('click', function() {
+        document.querySelector('.search-box').classList.add('input-clicked');
+    });
+});*/
 
 function handleRegionChange() {
     // 獲取選擇縣市的值
-    var selectedRegion = document.getElementById('search-input').value;
-  
-    // 清空區域的選項
-    var districtSelect = document.getElementById('districtSelect');
-    districtSelect.innerHTML = '';
+    var selectedRegion = document.getElementById('region');
+    var selectedCity = document.getElementById('city');
+    var option = new Option("");
+    region.options.add(option);
   
     // 根據選擇的縣市，動態添加相應的區域選項
-    switch (selectedRegion) {
+    var regionList=[{
+        name:"北部",
+            cityList:["台北市","新北市","基隆市","桃園市","新竹市", "新竹縣"]
+        },
+        {name:"中部",
+            cityList:["台中市","彰化縣","南投縣", "雲林縣"]
+        },
+        {name:"南部",
+            cityList:["台中市","彰化縣","南投縣"]
+        },
+        {name:"東部",
+            cityList:["宜蘭縣","花蓮縣","台東縣"]
+        },
+        {name:"離島地區",
+            cityList:["澎湖縣","金門縣","馬祖列島"]
+        }
+    ];
+
+    for(var i = 0; i < regionList.length; i++){
+        var option = new Option(regionList[i].name, )
+    } 
+
+    /*switch (selectedRegion) {
       case 'north':
         addDistrictOption('台北市');
         addDistrictOption('新北市');
@@ -43,9 +69,9 @@ function handleRegionChange() {
         addDistrictOption('金門縣');
         addDistrictOption('馬祖列島');
         break;
-      default:
+      //default:
         // 如果未選擇縣市，不添加任何區域選項
-        break;
+        //break;
     }
 }
   
@@ -55,7 +81,7 @@ function addDistrictOption(districtName) {
     option.value = districtName;
     option.textContent = districtName;
     districtSelect.appendChild(option);
-}
+}*/
   
 document.querySelector('.search-button').addEventListener('click', function(){
     let input = document.querySelector('.search-input').value;

@@ -18,7 +18,11 @@ body {
 .headBar {
     font-family: 'Livvic';
     width: 100%;
+<<<<<<< Updated upstream
     background-color: rgba(97, 97, 99, 0.5);
+=======
+    background-color: rgba(15, 26, 36, 0.6);
+>>>>>>> Stashed changes
     display: flex;
     height: 100px;
     align-items: center; 

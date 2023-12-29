@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../stylesheets/style1.css">
+    <script src = "javascripts/index.js"></script>
     <title>簡易搜尋引擎</title>
 </head>
 <body>
@@ -14,26 +15,27 @@
                 <h1 id="project-title"><span class="light">intern</span>Net</h1>
             </div>
 
-            <p>實習類型</p>
+            <p>Internship Type</p>
             <div class="search-box">
                 <input type="text" class="search-input" placeholder = "輸入實習類型">            
             </div>
 
-            <p>實習地區</p>
+            <p>Internship Location</p>
             <div class="search-box">
-                <select id="search-input" onchange="handleRegionchange()">
-                    <option value="" disabled selected>選擇縣市</option>
+                <select class="search-input" id="region" onchange="handleRegionchange()">
+                    <!--<option value="" disabled selected>選擇縣市</option>
                     <option value="north">北部</option>
                     <option value="central">中部</option>
                     <option value="south">南部</option>
                     <option value="east">東部</option>
-                    <option value="islands">離島</option>
+                    <option value="islands">離島</option>-->
                 </select>
-                <select id="districtSelect">
-                    <option value="" disabled selected>chooooose</option>
+                <select class="search-input" id="city">
+                    <!--<option value="" disabled selected>chooooose</option>
+                    <option value=""-->
                 </select>
             </div>
-            <p>期待時薪</p>
+            <p>Expected Salary per hour</p>
             <div class="search-box">
                 <input type="number" class="search-input" placeholder="最低薪資">
                 <label for="range"> ~ </label>
@@ -46,6 +48,5 @@
 
         </div>
     </div>
-    <script src = "javascripts/index.js"></script>
 </body>
 </html>
