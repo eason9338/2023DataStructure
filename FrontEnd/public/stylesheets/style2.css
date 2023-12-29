@@ -26,12 +26,18 @@ body {
     align-items: center; 
     justify-content: center;
     position: fixed;
-
 }
+
 .smallIcon{
     width: 100px;
     margin-right: 10px;
 }
+
+.headBar a {
+    display: flex;
+    align-items: center;
+}
+
 .search-container {
     display: flex;
     align-items: center;
