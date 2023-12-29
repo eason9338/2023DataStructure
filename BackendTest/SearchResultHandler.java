@@ -17,9 +17,20 @@ public class SearchResultHandler {
     }
 
     public ArrayList<SearchResultItem> search(String query) throws IOException{
-        String jsonResponse = googleQuery.search(query);
-        return extractLink(jsonResponse);
+        ArrayList<String> responseArray = googleQuery.search(query);
+        ArrayList<SearchResultItem> finalSearchResults = new ArrayList<>();
+        for(String response: responseArray) {
+            ArrayList<SearchResultItem> newSearchResults = extractLink(response);
+            finalSearchResults.addAll(newSearchResults);
+        }
+
+        return finalSearchResults;
     }
+
+    // public ArrayList<SearchResultItem> search(String query) throws IOException{
+    //     String jsonResponse = googleQuery.search(query);
+    //     return extractLink(jsonResponse);
+    // }
 
     public ArrayList<SearchResultItem> extractLink(String jsonResponse) {
         ArrayList<SearchResultItem> searchResults = new ArrayList<>();
