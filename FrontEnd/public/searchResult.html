@@ -8,40 +8,60 @@
     <title>搜尋結果</title>
 </head>
 <body>
-    <div class="headBar">
-        <div class="search-container">
-            <img src="../picture/small-icon-rmbg.png" class="smallIcon" alt="small-icon">
-            <div class="search-result-group">
-                <input type="text" class="search-input" placeholder="搜尋或輸入網址">
-                <button class="remove-button" onclick="clearSearch()">
-                    <img src="../picture/remove-rmbg.png" alt="清除" width="20" height="20">
-                </button>
-                <button class="search-button" onclick="searchResult()">
-                    <img src="../picture/search-rmbg.png" alt="搜尋" width="20" height="20">
-                </button>
+<div class="content-wrapper">
+        <div class="headBar">
+            <div class="search-container">
+                <img src="../picture/small-icon-rmbg.png" class="smallIcon" alt="small-icon">
+                <div class="search-box">
+                    <select id="search-input" onchange="handleRegionchange()">
+                        <option value="" disabled selected>選擇縣市</option>
+                        <option value="north">北部</option>
+                        <option value="central">中部</option>
+                        <option value="south">南部</option>
+                        <option value="east">東部</option>
+                        <option value="islands">離島</option>
+                    </select>
+                    <select id="districtSelect">
+                        <option value="" disabled selected>chooooose</option>
+                    </select>
+                </div>
+                <div class="search-money">
+                    <input type="number" class="searchMny-input" placeholder="最低薪資">
+                    <label for="range"> ~ </label>
+                    <input type="number" class="searchMny-input" placeholder="最高薪資">
+                </div>
+                <div class="search-result-group">
+                    <input type="text" class="search-input" placeholder="輸入實習類型">
+                    <button class="remove-button" onclick="clearSearch()">
+                        <img src="../picture/remove-rmbg.png" alt="清除" width="20" height="20">
+                    </button>
+                    <button class="search-button" onclick="searchResult()">
+                        <img src="../picture/search-rmbg.png" alt="搜尋" width="20" height="20">
+                    </button>
+                    
+                </div>
             </div>
         </div>
-    </div>
-    <div class="results">
-        <div class="result-item">
-            <h2><a href="#">政政小廚師好難吃</a></h2>
-            <p>2 天前 — 今天開幕了但目前都沒有人在校版討論的樣子，剛剛晚餐去吃了蝦仁飯，想卡其他的怎麼樣 ，（在指南路上，大概小木屋的對面）， 蝦仁飯$120 ...</p>
+        <div class="results">
+            <div class="result-item">
+                <h2><a href="#">政政小廚師好難吃</a></h2>
+                <p>2 天前 — 今天開幕了但目前都沒有人在校版討論的樣子，剛剛晚餐去吃了蝦仁飯，想卡其他的怎麼樣 ，（在指南路上，大概小木屋的對面）， 蝦仁飯$120 ...</p>
+            </div>
+            <div class="result-item">
+                <h2><a href="#">大學生找實習</a></h2>
+                <p>2023年9月17日2023年實習生工作機會都在這！知名企業、外商公司、新創招募實習生人才中。透過CakeResume 求職平台找工作，應徵實習生職缺。</p>
+            </div>
+            <div class="result-item">
+                <h2><a href="#">「實習」找寒暑假打工、短期打工兼職、學生打工｜104 實習專區...</a></h2>
+                <p>「實習」最新職缺與工作機會。知名企業、外商公司、新創職缺都在Yourator數位人才求職平台｜為求職者打造更便利的求職環境，提供AI履歷工具，多元策展專區如DEI、日商 ...</p>
+            </div>
+            <div class="result-item">
+                <h2><a href="#">2023年實習生工作職缺</a></h2>
+                <p>幸福企業徵人【一般實習工作】約1834筆－【學生實習】人力資源實習生、1002-儲備幹部、【麗尊酒店】房務員、晚班吧檯人員-紅廚、機械研發實習生等熱門工作急徵。1111 ...
+                </p>
+            </div>
         </div>
-        <div class="result-item">
-            <h2><a href="#">新莊人氣排隊小吃！瓜子肉飯配半熟蛋超下飯老闆竟是「大 ...</a></h2>
-            <p>2023年9月17日 — 「一甲子私房小廚」掌廚人是大飯店退休主廚，不少老饕和知名企業家，早就是他的粉絲，所以就算才剛開幕，熟客、新客都絡繹不絕，電話訂單更是接到手軟！...</p>
-        </div>
-        <div class="result-item">
-            <h2><a href="#">「實習」找寒暑假打工、短期打工兼職、學生打工｜104 實習專區...</a></h2>
-            <p>「實習」最新職缺與工作機會。知名企業、外商公司、新創職缺都在Yourator數位人才求職平台｜為求職者打造更便利的求職環境，提供AI履歷工具，多元策展專區如DEI、日商 ...</p>
-        </div>
-        <div class="result-item">
-            <h2><a href="#">2023年實習生工作職缺</a></h2>
-            <p>幸福企業徵人【一般實習工作】約1834筆－【學生實習】人力資源實習生、1002-儲備幹部、【麗尊酒店】房務員、晚班吧檯人員-紅廚、機械研發實習生等熱門工作急徵。1111 ...
-            </p>
-        </div>
-    </div>
-
+</div>
     <!-- <div style="width: 1440px; height: 512px; position: relative; background: white; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
         <div class="Frame1" style="width: 1440px; height: 211px; position: relative; background: #003366">
           <div class="Group1" style="width: 896px; height: 96px; left: 272px; top: 66px; position: absolute">

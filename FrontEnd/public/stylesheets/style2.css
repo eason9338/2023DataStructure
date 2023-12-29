@@ -18,12 +18,13 @@ body {
 .headBar {
     font-family: 'Livvic';
     width: 100%;
-    background-color: #036;
+    background-color: rgba(110, 110, 111, 0.5);
     display: flex;
     height: 100px;
     align-items: center; 
     justify-content: center;
-    /* flex-direction: column; */
+    position: fixed;
+
 }
 .smallIcon{
     width: 100px;
@@ -37,7 +38,8 @@ body {
 
 .search-result-group {
     position: relative;
-    align-items: center;
+    /* align-items: center; */
+    justify-content: center;
     /* margin-top: 0px; */
     display: flex; 
 
@@ -47,29 +49,60 @@ body {
     flex-grow: 1; 
     padding: 10px;
     border: 1px solid #dfe1e5;
-    width: 800px;
+    width: 300px;
     height: 20px;
-    border-radius: 24px;
+    border-radius: 25px;
     font-size: 16px;
     outline: none;
+    margin: 10px;
+  }
+  .searchMny-input{
+    flex-grow: 1; 
+    padding: 10px;
+    border: 1px solid #dfe1e5;
+    /* width: 150px; */
+    height: 5px;
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+    margin: 10px;
+  } 
+
+  .search-money{
+    margin: 10px;
+    border-radius: 25px;
+    background-color: #ffffff;
+    width: 450px;
+    display: flex;
+  }
+ 
+  
+.search-box {
+    border: 1px solid #dfe1e5;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    background-color: #ffffff;
+    border-radius: 25px;
+    padding: 10px;
   }
 .results {
+    margin-top: 100px;
+    margin-left: 350px;
     align-items: center;
-    margin-top: 20px;
-    padding: 0 30%;
-    width: 900px;
-    /* box-sizing: border-box;  */
+    width: 700px;
  
 }
 .result-item {
-    background: #f9f9f9;
+    background: #e6e5e5;
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 5px;
+ 
 }
 .result-item a {
     text-decoration: none;
-    color: green;
+    color: rgb(3, 106, 3);
 }
 .result-item p {
     color: #333;
@@ -100,6 +133,17 @@ body {
     border:none;
     background: transparent;
     cursor: pointer;
+}
+.content-wrapper{
+   width: 100%;
+    background:linear-gradient(
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)
+    ), url('../picture/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
 }
 /* .search-button {
     background-color: transparent;
