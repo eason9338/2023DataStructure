@@ -12,6 +12,7 @@ body {
     flex-direction: column;
     align-items: center;
     height: 100vh;
+    width: 100%;
 }
 
 .headBar {
@@ -19,23 +20,67 @@ body {
     width: 100%;
     background-color: #036;
     display: flex;
+    height: 100px;
+    align-items: center; 
+    justify-content: center;
+    /* flex-direction: column; */
+}
+.smallIcon{
+    width: 100px;
+    margin-right: 10px;
+}
+.search-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
 }
 
 .search-result-group {
     position: relative;
-    display: inline-block;
+    align-items: center;
+    /* margin-top: 0px; */
+    display: flex; 
+
 }
 
-.img, .search-result-group {
+.search-input {
+    flex-grow: 1; 
+    padding: 10px;
+    border: 1px solid #dfe1e5;
+    width: 800px;
+    height: 20px;
+    border-radius: 24px;
+    font-size: 16px;
+    outline: none;
+  }
+.results {
+    align-items: center;
+    margin-top: 20px;
+    padding: 0 30%;
+    width: 900px;
+    /* box-sizing: border-box;  */
+ 
+}
+.result-item {
+    background: #f9f9f9;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+.result-item a {
+    text-decoration: none;
+    color: green;
+}
+.result-item p {
+    color: #333;
+}
+/* .img, .search-result-group {
     display: inline-block;
     vertical-align: left;
-}
+} */
 
-#search-input {
-    padding-right: 40px;
-}
-
-.remove-button {
+  
+  .remove-button {
     position: absolute;
     top: 0;
     right: 35px;  /* 調整按鈕的位置 */
@@ -44,36 +89,19 @@ body {
     border:none;
     background: transparent;
     cursor: pointer;
-}
 
+}
 .search-button {
     position: absolute;
     top: 0;
-    right: 0px;  /* 調整按鈕的位置 */
+    right: 9px;  /* 調整按鈕的位置 */
     height: 100%; /* 讓按鈕高度與輸入框一致 */
     padding: 5px;
     border:none;
     background: transparent;
     cursor: pointer;
 }
-
-.smallIcon{
-    font-family: 'Livvic';
-    justify-content: center;
-}
-
-.remove-button {
-    background-color: transparent;
-    color:#fff;
-    border: none;
-    border-radius: 24px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-left: 16px;
-}
-
-.search-button {
+/* .search-button {
     background-color: transparent;
     color: #fff;
     border: none;
@@ -82,23 +110,34 @@ body {
     cursor: pointer;
     font-size: 16px;
     margin-left: 8px;
-  }
-  
-  .search-bar {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    background-color: #ffffff;
-    border-radius: 25px;
-    padding: 5px 10px;
-  }
-  
-  .search-input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #dfe1e5;
-    width: 500px;
+  } */
+/* .remove-button {
+    background-color: transparent;
+    color:#fff;
+    border: none;
     border-radius: 24px;
+    padding: 10px 20px;
+    cursor: pointer;
     font-size: 16px;
-    outline: none;
-  }
+    margin-left: 16px;
+} */
+/* 
+#search-input {
+    padding-right: 40px;
+} */
+
+
+
+
+
+/* .smallIcon{
+    font-family: 'Livvic';
+    justify-content: center;
+    height: 100px;
+} */
+
+
+
+  
+  
+  
