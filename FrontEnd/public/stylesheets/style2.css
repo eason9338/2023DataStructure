@@ -18,7 +18,7 @@ body {
 .headBar {
     font-family: 'Livvic';
     width: 100%;
-    background-color: rgba(110, 110, 111, 0.5);
+    background-color: rgba(97, 97, 99, 0.5);
     display: flex;
     height: 100px;
     align-items: center; 
