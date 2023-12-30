@@ -62,7 +62,7 @@ body {
 }
 
 .left-panel p {
-  font-family:'Times New Roman', Times, serif;
+  font-family:'Livvic';
   font-size: 16px;
 }
 
@@ -105,7 +105,7 @@ body {
   gap: 5px;
   background-color: #ffffff;
   border-radius: 25px;
-  padding: 5px 10px;
+  padding: 10px 10px;
 }
 
 .search-input {
