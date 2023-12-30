@@ -12,6 +12,22 @@
         <div class="headBar">
             <div class="search-container">
                 <img src="../picture/small-icon-rmbg.png" class="smallIcon" alt="small-icon">
+                <div class="search-result-group">
+                    <input type="text" class="search-input" placeholder="輸入實習類型">
+                    <button class="remove-button" onclick="clearSearch()">
+                        <img src="../picture/remove-rmbg.png" alt="清除" width="20" height="20">
+                    </button>
+                    <button class="search-button" onclick="searchResult()">
+                        <img src="../picture/search-rmbg.png" alt="搜尋" width="20" height="20">
+                    </button>
+                    
+                </div>
+                <div class="search-money">
+                    <input type="number" class="searchMny-input" placeholder="最低薪資">
+                    <label for="range"> ~ </label>
+                    <input type="number" class="searchMny-input" placeholder="最高薪資">
+                </div>
+                
                 <div class="search-box">
                     <select id="search-input" onchange="handleRegionchange()">
                         <option value="" disabled selected>選擇縣市</option>
@@ -24,21 +40,6 @@
                     <select id="districtSelect">
                         <option value="" disabled selected>chooooose</option>
                     </select>
-                </div>
-                <div class="search-money">
-                    <input type="number" class="searchMny-input" placeholder="最低薪資">
-                    <label for="range"> ~ </label>
-                    <input type="number" class="searchMny-input" placeholder="最高薪資">
-                </div>
-                <div class="search-result-group">
-                    <input type="text" class="search-input" placeholder="輸入實習類型">
-                    <button class="remove-button" onclick="clearSearch()">
-                        <img src="../picture/remove-rmbg.png" alt="清除" width="20" height="20">
-                    </button>
-                    <button class="search-button" onclick="searchResult()">
-                        <img src="../picture/search-rmbg.png" alt="搜尋" width="20" height="20">
-                    </button>
-                    
                 </div>
             </div>
         </div>
