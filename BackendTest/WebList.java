@@ -1,17 +1,16 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class WebList {
-    private List<WebPage> webPages;
+    private ArrayList<WebPage> webPages;
 
     // constructor
-    public WebList(List<WebPage> webPages) {
+    public WebList(ArrayList<WebPage> webPages) {
         this.webPages = webPages;
     }
 
     // 對WebPage列表按照分數降序進行排序
     public void sortByScore() {
-        if (webPages != null && webPages.size() > 1) {
+        if (webPages != null && !webPages.isEmpty()) {
             quickSort(0, webPages.size() - 1);
         }
     }
@@ -44,7 +43,6 @@ public class WebList {
         swap(i + 1, high);
         return i + 1;
     }
-    
 
     // 交換WebPage列表中兩個元素的位置
     private void swap(int i, int j) {

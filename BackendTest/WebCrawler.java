@@ -2,109 +2,122 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
+import javax.net.ssl.*;
+import java.security.cert.X509Certificate;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.security.SecureRandom;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.ArrayList;
-import java.util.List;
 
 public class WebCrawler {
 
-    private WebTree webTree; // 儲存建立的網頁樹結構
-    private static final int MAX_DEPTH = 1; // 設定最大爬取深度
-    private List<WebPage> allVisitedUrls;
+    private WebTree webTree; // 存儲構建的網頁樹結構
+    private int maxDepth = 0; // 設置最大爬取深度
+    private Set<String> allVisitedUrls; // 存儲所有訪問過的URL
+    private ArrayList<Keyword> keywords; // 用於計算分數的關鍵詞列表
+    private double scoreThreshold = 100; // 分數閾值
+    private ArrayList<WebPage> highScorePages; // 存儲分數高於閾值的頁面
 
-    // 創建 WebCrawler 實例時進行網站爬取，建立 WebTree
-    public WebCrawler(String rootUrl) {
-        this.allVisitedUrls = new ArrayList<>();
+    public WebCrawler(String rootUrl, ArrayList<Keyword> keywords) {
+        this.allVisitedUrls = new HashSet<>();
+        this.keywords = keywords;
+        this.highScorePages = new ArrayList<>();
+
+        // 啟用自定義信任管理器
+        enableTrustAllCerts();
 
         WebPage rootPage = new WebPage(rootUrl);
-        
-        // 檢查是否已經存在於列表中，有的話先刪除
-        String normalizedRootUrl = normalizeUrl(rootUrl);
-        allVisitedUrls.removeIf(page -> normalizeUrl(page.getUrl()).equals(normalizedRootUrl));
-
-        this.allVisitedUrls.add(rootPage);
-        crawlWebPages(rootUrl, 0); // 開始進行網頁爬取
-
-        this.webTree = buildWebTree(rootPage);
+        this.webTree = new WebTree(rootPage);
+        crawlWebPages(rootUrl, this.webTree.root, 0);
     }
 
+    // 自定義的信任管理器，信任所有 SSL 證書
+    private void enableTrustAllCerts() {
+        TrustManager[] trustAllCerts = new TrustManager[] {
+            new X509TrustManager() {
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new X509Certificate[0];
+                }
+                public void checkClientTrusted(X509Certificate[] certs, String authType) {}
+                public void checkServerTrusted(X509Certificate[] certs, String authType) {}
+            }
+        };
 
-    // 獲取 WebTree 
-    public WebTree getWebTree() {
-        return webTree;
+        try {
+            SSLContext sc = SSLContext.getInstance("SSL");
+            sc.init(null, trustAllCerts, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+            HttpsURLConnection.setDefaultHostnameVerifier((hostname, session) -> true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // 遞迴爬取網頁鏈接的方法
-    private void crawlWebPages(String url, int depth) {
-        if (depth > MAX_DEPTH) {
-            return; // 超過最大深度，停止爬取
+    private void crawlWebPages(String url, WebNode parentNode, int depth) {
+        if (depth > maxDepth || allVisitedUrls.contains(url)) {
+            return;
         }
 
         try {
-            Document document = Jsoup.connect(url).get();
-            normalizeUrl(url);
+            Document document = Jsoup.connect(url)
+                                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
+                                     .get();
+            WebPage currentPage = new WebPage(url);
+            currentPage.setScore(keywords); // 正常設置分數
+
+            // 檢查分數是否高於閾值，如果是，則添加到 highScorePages 列表
+            if (currentPage.score > scoreThreshold) {
+                highScorePages.add(currentPage);
+            }
+
+            WebNode currentNode = new WebNode(currentPage);
+            parentNode.addChild(currentNode);
+            allVisitedUrls.add(url);
 
             Elements links = document.select("a[href]");
-
             for (Element link : links) {
-                String childUrl = link.attr("abs:href");
-                String normalizedChildUrl = normalizeUrl(childUrl);
-                // 檢查是否已經存在於列表中，且子網頁以 "https://" 開頭
-                if (!containsUrl(allVisitedUrls, normalizedChildUrl) && normalizedChildUrl.startsWith("https://")) {
-                    WebPage childPage = new WebPage(normalizedChildUrl);
-                    allVisitedUrls.add(childPage);
-                    crawlWebPages(childUrl, depth + 1);
-                }
+                String childUrl = link.absUrl("href");
+                crawlWebPages(childUrl, currentNode, depth + 1);
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            WebPage errorPage = new WebPage(url);
+            errorPage.score = 0; // 分數設為 0
+            WebNode errorNode = new WebNode(errorPage);
+            parentNode.addChild(errorNode);
+            allVisitedUrls.add(url);
+            System.out.println("訪問URL時出錯: " + url + " - " + e.getMessage());
         }
     }
 
-    // 建立 WebTree 的方法
-    private WebTree buildWebTree(WebPage rootPage) {
-        WebTree tree = new WebTree(rootPage);
-
-        for (WebPage crawledPage : allVisitedUrls) {
-            if (!crawledPage.getUrl().equals(rootPage.getUrl())) {
-                tree.root.addChild(new WebNode(crawledPage));
-            }
-        }
-        return tree;
+    // 計算整個 WebTree 的分數
+    public void calculateTotalScore() throws IOException {
+        this.webTree.setPostOrderScore(keywords);
     }
 
-    // 正規化 URL 的方法
-    private String normalizeUrl(String url) {
-        try {
-            URL normalizedUrl = new URL(url);
-            String path = normalizedUrl.getPath().endsWith("/") ? normalizedUrl.getPath() : normalizedUrl.getPath() + "/";
-            return normalizedUrl.getProtocol() + "://" + normalizedUrl.getHost() + path;
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            return url.toLowerCase().replaceAll("/$", "");
+    // 獲取 WebTree 總分
+    public double getTotalScore() {
+        return this.webTree.getTotalScore();
+    }
+
+    // 獲取 WebTree 實例
+    public WebTree getWebTree() {
+        return this.webTree;
+    }
+
+    // 打印所有訪問過的 URL
+    public void printVisitedUrls() {
+        for (String url : allVisitedUrls) {
+            System.out.println(url);
         }
     }
 
-
-    // 檢查網址是否已經存在於列表中的方法
-    private boolean containsUrl(List<WebPage> pages, String url) {
-        for (WebPage page : pages) {
-            if (page.getUrl().equals(url)) {
-                return true;
-            }
-        }
-        return false;
+    // 獲取分數高於閾值的頁面
+    public ArrayList<WebPage> getHighScorePages() {
+        return highScorePages;
     }
 
-    // 打印所有訪問過的網址的方法
-    public void printList() {
-        for (WebPage page : allVisitedUrls) {
-            System.out.println(page.url);
-        }
-    }
-    
+    // 其他方法...
 }
