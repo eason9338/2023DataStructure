@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import java.util.ArrayList;
 
 public class Main {
@@ -82,5 +85,30 @@ public class Main {
         }
         // 對 WebList 實例進行排序
         webList.sortByScore();
+        ArrayList<SearchResultItem> ResultsAfterSort = new ArrayList<SearchResultItem>();
+
+        for (WebPage w : webPages) { // 假設 WebList 有一個 getPages 方法傳回 WebPage 物件的列表
+            String url = w.getUrl();
+            String title = "";
+
+            // 使用 Jsoup 取得標題
+            try {
+                Document doc = Jsoup.connect(url).get();
+                title = doc.title();
+            } catch (IOException e) {
+                System.err.println("存取URL時發生錯誤: " + e.getMessage());
+                title = "無法取得標題"; // 如果無法存取網頁或發生其他錯誤
+            }
+
+            // 建立 SearchResultItem 物件並新增到清單中
+            SearchResultItem item = new SearchResultItem(title, url);
+            ResultsAfterSort.add(item);
+        }
+        // for (SearchResultItem item : ResultsAfterSort) {
+        //     System.out.println("標題: " + item.getTitle());
+        //     System.out.println("連結: " + item.getLink());
+        //     System.out.println(); // 增加一個空白行以分隔不同的結果
+        //  }
+        // //以上code可以測試 ResultsAfterSort就是算分排序後的searchResultHandler
     }
 }
