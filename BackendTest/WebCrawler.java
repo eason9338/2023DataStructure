@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.RecursiveAction;
 
 public class WebCrawler {
 
@@ -18,18 +21,20 @@ public class WebCrawler {
     private ArrayList<Keyword> keywords; // 用於計算分數的關鍵詞列表
     private double scoreThreshold = 100; // 分數門檻
     private ArrayList<WebPage> highScorePages; // 存儲分數高於門檻的頁面
+    private ForkJoinPool pool; // 用於並行處理的 ForkJoinPool
 
     public WebCrawler(String rootUrl, ArrayList<Keyword> keywords) {
         this.allVisitedUrls = new HashSet<>();
         this.keywords = keywords;
         this.highScorePages = new ArrayList<>();
+        this.pool = new ForkJoinPool(); // 初始化 ForkJoinPool
 
-        // 啟用自定義信任管理器
         enableTrustAllCerts();
 
         WebPage rootPage = new WebPage(rootUrl);
         this.webTree = new WebTree(rootPage);
-        crawlWebPages(rootUrl, this.webTree.root, 0);
+        CrawlTask task = new CrawlTask(rootUrl, this.webTree.root, 0);
+        pool.invoke(task); // 使用 ForkJoinPool 開始任務
     }
 
     // 自定義的信任管理器，信任所有 SSL 證書
@@ -54,54 +59,71 @@ public class WebCrawler {
         }
     }
 
-    private void crawlWebPages(String url, WebNode parentNode, int depth) {
-        if (depth > maxDepth || allVisitedUrls.contains(url) || !isValidUrl(url)) {
-            return;
-        }
-    
-        try {
-            Document document = Jsoup.connect(url).get();
-    
-            WebPage currentPage = new WebPage(url);
-            currentPage.setScore(keywords);
-    
-            if (currentPage.score > scoreThreshold) {
-                highScorePages.add(currentPage);
-            }
-    
-            WebNode currentNode = new WebNode(currentPage);
-            parentNode.addChild(currentNode);
-            allVisitedUrls.add(url);
-    
-            Elements links = document.select("a[href]");
-            for (Element link : links) {
-                String childUrl = link.absUrl("href");
-                crawlWebPages(childUrl, currentNode, depth + 1);
-            }
-    
-        } catch (IOException e) {
-            System.err.println("訪問URL時出錯: " + url + " - " + e.getMessage());
-            // 當主網頁出現異常時，創建一個分數為0的WebPage對象，並不繼續爬取子網頁
-            WebPage errorPage = new WebPage(url);
-            errorPage.score = 0; // 分數設為0
-            WebNode errorNode = new WebNode(errorPage);
-            parentNode.addChild(errorNode);
-        }
-    }
-    
-    
     // 檢查URL是否有效的方法
     private boolean isValidUrl(String url) {
         return url.startsWith("http://") || url.startsWith("https://");
     }
-    
+
+    // 內部類，用於並行處理網頁爬取任務的 RecursiveAction
+    private class CrawlTask extends RecursiveAction {
+        private String url;
+        private WebNode parentNode;
+        private int depth;
+
+        public CrawlTask(String url, WebNode parentNode, int depth) {
+            this.url = url;
+            this.parentNode = parentNode;
+            this.depth = depth;
+        }
+
+        @Override
+        protected void compute() {
+            if (depth > maxDepth || allVisitedUrls.contains(url) || !isValidUrl(url)) {
+                return;
+            }
+
+            try {
+                Document document = Jsoup.connect(url).get();
+                WebPage currentPage = new WebPage(url);
+                currentPage.setScore(keywords);
+
+                if (currentPage.score > scoreThreshold) {
+                    highScorePages.add(currentPage);
+                }
+
+                WebNode currentNode = new WebNode(currentPage);
+                parentNode.addChild(currentNode);
+                allVisitedUrls.add(url);
+
+                List<CrawlTask> tasks = new ArrayList<>();
+                Elements links = document.select("a[href]");
+                for (Element link : links) {
+                    String childUrl = link.absUrl("href");
+                    CrawlTask task = new CrawlTask(childUrl, currentNode, depth + 1);
+                    tasks.add(task);
+                    task.fork();
+                }
+
+                for (CrawlTask task : tasks) {
+                    task.join();
+                }
+
+            } catch (IOException e) {
+                System.err.println("訪問URL時出錯: " + url + " - " + e.getMessage());
+                WebPage errorPage = new WebPage(url);
+                errorPage.score = 0;
+                WebNode errorNode = new WebNode(errorPage);
+                parentNode.addChild(errorNode);
+            }
+        }
+    }
 
     // 其他方法...
-    public WebTree getWebTree(){
+    public WebTree getWebTree() {
         return this.webTree;
     }
 
-    public ArrayList<WebPage> getHighScorePages(){
+    public ArrayList<WebPage> getHighScorePages() {
         return this.highScorePages;
     }
 }
