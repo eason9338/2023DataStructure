@@ -104,11 +104,11 @@ public class Main {
             SearchResultItem item = new SearchResultItem(title, url);
             ResultsAfterSort.add(item);
         }
-        // for (SearchResultItem item : ResultsAfterSort) {
-        //     System.out.println("標題: " + item.getTitle());
-        //     System.out.println("連結: " + item.getLink());
-        //     System.out.println(); // 增加一個空白行以分隔不同的結果
-        //  }
-        // //以上code可以測試 ResultsAfterSort就是算分排序後的searchResultHandler
+        for (SearchResultItem item : ResultsAfterSort) {
+            System.out.println("標題: " + item.getTitle());
+            System.out.println("連結: " + item.getLink());
+            System.out.println(); // 增加一個空白行以分隔不同的結果
+         }
+        //以上code可以測試 ResultsAfterSort就是算分排序後的searchResultHandler
     }
 }
