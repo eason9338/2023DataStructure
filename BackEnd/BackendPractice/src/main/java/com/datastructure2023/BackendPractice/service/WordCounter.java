@@ -7,17 +7,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-
-
-
 public class WordCounter {
     private String urlStr; // 目標 URL
     private String content; // 存儲 URL 內容
-
-    // 輸入URL
-    public WordCounter(String urlStr) {
-        this.urlStr = urlStr;
-    }
 
     //將 URL 轉為String
     private String fetchContent() throws IOException {
@@ -101,5 +93,7 @@ public class WordCounter {
             return a;
     }
 
-   
+    public void urlSetter(String url) {
+        this.urlStr = url;
+    }
 }

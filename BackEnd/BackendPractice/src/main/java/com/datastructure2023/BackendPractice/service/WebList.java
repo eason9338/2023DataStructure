@@ -2,10 +2,8 @@ package com.datastructure2023.BackendPractice.service;
 
 import com.datastructure2023.BackendPractice.model.WebPage;
 
-import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
-@Service
 public class WebList {
     private ArrayList<WebPage> webPages;
 

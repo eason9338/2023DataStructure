@@ -1,7 +1,6 @@
 package com.datastructure2023.BackendPractice.service;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -14,7 +13,6 @@ import java.io.IOException;
 
 import com.datastructure2023.BackendPractice.model.SearchResultItem;
 
-@Service
 public class SearchResultHandler {
 
     public GoogleQuery googleQuery;

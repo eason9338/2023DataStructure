@@ -13,7 +13,6 @@ import com.datastructure2023.BackendPractice.model.Keyword;
 import com.datastructure2023.BackendPractice.model.SearchResultItem;
 import com.datastructure2023.BackendPractice.model.WebPage;
 import com.datastructure2023.BackendPractice.model.WebTree;
-import com.datastructure2023.BackendPractice.model.Keyword;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -63,9 +62,10 @@ public class SearchController {
 
 
             for(SearchResultItem result: results) {
-                WebPage page = new WebPage(result.getLink());
-                webPages.add(page);
                 String url = result.getLink();
+                WebPage page = new WebPage(url);
+                webPages.add(page);
+
                 WebCrawler webCrawler = new WebCrawler(url, keywordList);
                  WebTree webTree = webCrawler.getWebTree();
 
@@ -124,7 +124,8 @@ public class SearchController {
     
                 if (!found) {
                     title = "無法取得標題"; // 如果在 results 中也找不到標題
-                }            }
+                }            
+            }
 
             SearchResultItem item = new SearchResultItem(title, url);
             resultsAfterSort.add(item);
