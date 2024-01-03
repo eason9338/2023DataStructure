@@ -8,23 +8,6 @@ import java.util.Scanner;
 public class KeywordList {
 	private ArrayList<Keyword> lst;
 	
-	public KeywordList() throws FileNotFoundException{
-		this.lst = new ArrayList<Keyword>();
-		File keywordFile = new File("../resources/Keyword.txt");
-		Scanner sc = new Scanner(keywordFile);
-
-		while(sc.hasNextLine()) {
-			String keywordName = sc.next();
-			float keywordWeight = sc.nextFloat();
-
-			Keyword newKeyword = new Keyword(keywordName, keywordWeight);
-			lst.add(newKeyword);
-
-		}
-
-		sc.close();
-    }
-	
 	public void add(Keyword keyword){
 		lst.add(keyword);
     }
