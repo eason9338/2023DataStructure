@@ -83,23 +83,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const resultItem = document.createElement('div');
             resultItem.className = 'result-item';
 
-            // 創建標題元素
+            // 創建標題
             const titleElement = document.createElement('h2');
             const titleLink = document.createElement('a');
-            titleLink.href = result.link;  // 設定連結
-            titleLink.textContent = result.title;  // 設定標題
+            // titleLink.href = result.link;  // 設定連結
+            titleElement.textContent = result.title;  // 設定標題
             titleElement.appendChild(titleLink);
 
-            // 創建連結元素
+            // 創建連結
             const linkElement = document.createElement('a');
             linkElement.href = result.link;  // 設定連結
             linkElement.textContent = linkElement.href;  
 
-            // 將標題和連結元素添加到區域中
             resultItem.appendChild(titleElement);
             resultItem.appendChild(linkElement);
 
-            // 將整個搜尋結果區域添加到容器中
             resultsContainer.appendChild(resultItem);
         });
     }
