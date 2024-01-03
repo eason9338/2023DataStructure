@@ -1,3 +1,40 @@
+function searchResult() {
+    let input = document.querySelector('.search-input-type').value;
+    let region = document.querySelector('#search-input').value;
+    let lowSalary = document.querySelector('#first-num').value;
+    let highSalary = document.querySelector('#second-num').value;
+    console.log('發送請求:', input); // 在發送請求之前打印
+
+    fetch('http://localhost:8080/searchResult', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            input: input,
+            region: region,
+            lowSalary: lowSalary,
+            highSalary: highSalary
+        })
+    })
+    .then(response => {
+        console.log('收到響應:', response); // 收到響應時打印
+        if (response.ok) {
+            return response.json(); // 確認響應狀態正常後解析 JSON
+        } else {
+            throw new Error('Network response was not ok.');
+        }
+    })
+    .then(data => {
+        console.log('處理數據:', data); // 處理數據時打印
+        sessionStorage.setItem('searchResults', JSON.stringify(data));
+        window.location.href = '/searchResult.html';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    })
+}
+
 function clearSearch(){
     //找到搜尋欄的input
     var userInput = document.querySelector('.search-input');
