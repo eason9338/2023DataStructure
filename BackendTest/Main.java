@@ -63,35 +63,50 @@ public class Main {
         webList.sortByScore();
         highScoreList.sortByScore();
 
-        processWebPages(highScorePages, "以下為高分子網頁:");
-        processWebPages(webPages, "以下為一般網頁");
-
+        processWebPages(highScorePages, "以下為高分子網頁:",results);
+        processWebPages(webPages, "以下為一般網頁",results);
+        //把一開始googlesearch到的array加到最後
     }
 
-    private static void processWebPages(ArrayList<WebPage> webPages, String header) {
+    //下面是改了的method
+    private static void processWebPages(ArrayList<WebPage> webPages, String header, ArrayList<SearchResultItem> results) {
         System.out.println(header);
         ArrayList<SearchResultItem> resultsAfterSort = new ArrayList<>();
-
+    
         for (WebPage w : webPages) {
             String url = w.getUrl();
             String title = "";
-
+    
             try {
                 Document doc = Jsoup.connect(url).get();
                 title = doc.title();
             } catch (IOException e) {
                 System.err.println("存取URL時發生錯誤: " + e.getMessage());
-                title = "無法取得標題";
+    
+                // 在 results 中查找相應的標題
+                boolean found = false;
+                for (SearchResultItem item : results) {
+                    if (item.getLink().equals(url)) {
+                        title = item.getTitle();
+                        found = true;
+                        break;
+                    }
+                }
+    
+                if (!found) {
+                    title = "無法取得標題"; // 如果在 results 中也找不到標題
+                }
             }
-
+    
             SearchResultItem item = new SearchResultItem(title, url);
             resultsAfterSort.add(item);
         }
-
+    
         for (SearchResultItem item : resultsAfterSort) {
             System.out.println("標題: " + item.getTitle());
             System.out.println("連結: " + item.getLink());
             System.out.println(); // 增加一個空白行以分隔不同的結果
         }
     }
+    
 }
