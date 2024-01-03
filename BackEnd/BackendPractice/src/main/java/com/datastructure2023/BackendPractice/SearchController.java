@@ -26,12 +26,41 @@ import java.lang.String;
 @RestController
 public class SearchController {
 
+    static class SearchRequest {
+        private String input;
+        private String region;
+        private String lowSalary;
+        private String highSalary;
+
+        public void setInput(String input) {
+            this.input = input;
+        }
+        public void setRegion(String region) {
+            this.region = region;
+        }
+        public void setLowSalary(String lowSalary) {
+            this.lowSalary = lowSalary;
+        }
+        public void setHighSalary(String highSalary) {
+            this.highSalary = highSalary;
+        }
+
+        public String getInput() { return this.input; }
+        public String getRegion() { return this.region; }
+        public String getLowSalary() { return this.lowSalary; }
+        public String getHighSalary() { return this.highSalary; }
+    }
+
     @PostMapping("/searchResult")
-    public ResponseEntity<?> search(@RequestBody String query) {
+    public ResponseEntity<?> search(@RequestBody SearchRequest request) {
         try {
             ArrayList<Keyword> keywordList = new ArrayList<>();
 
             //Add keywords and their weights to the list
+            keywordList.add(new Keyword(request.getRegion(), 1.5f));
+            keywordList.add(new Keyword(request.getHighSalary(), 1.5f));
+            keywordList.add(new Keyword(request.getLowSalary(), 1.5f));
+
             keywordList.add(new Keyword("實習", 0.9f));
             keywordList.add(new Keyword("實習生", 0.9f));
             keywordList.add(new Keyword("大一", 0.2f));
@@ -55,7 +84,7 @@ public class SearchController {
             keywordList.add(new Keyword("培訓", 0.6f));
             
             SearchResultHandler searchResultHandler = new SearchResultHandler();
-            ArrayList<SearchResultItem> results = searchResultHandler.search("實習");
+            ArrayList<SearchResultItem> results = searchResultHandler.search(request.getInput() + "實習");
 
             ArrayList<WebPage> webPages = new ArrayList<WebPage>();
             ArrayList<WebPage> highScorePages = new ArrayList<WebPage>(); // 存儲分數高於閾值的頁面
