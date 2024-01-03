@@ -73,3 +73,34 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const results = JSON.parse(sessionStorage.getItem('searchResults'));
+    const resultsContainer = document.getElementById('searchResultsContainer');
+
+    if (results && resultsContainer) {
+        results.forEach(result => {
+            // 創建一個包含標題和連結的區域
+            const resultItem = document.createElement('div');
+            resultItem.className = 'result-item';
+
+            // 創建標題元素
+            const titleElement = document.createElement('h2');
+            const titleLink = document.createElement('a');
+            titleLink.href = result.link;  // 設定連結
+            titleLink.textContent = result.title;  // 設定標題
+            titleElement.appendChild(titleLink);
+
+            // 創建連結元素
+            const linkElement = document.createElement('a');
+            linkElement.href = result.link;  // 設定連結
+            linkElement.textContent = linkElement.href;  
+
+            // 將標題和連結元素添加到區域中
+            resultItem.appendChild(titleElement);
+            resultItem.appendChild(linkElement);
+
+            // 將整個搜尋結果區域添加到容器中
+            resultsContainer.appendChild(resultItem);
+        });
+    }
+});
