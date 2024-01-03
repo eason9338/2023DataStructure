@@ -62,3 +62,14 @@ function addOption(selectElement, optionText) {
     option.text = optionText;
     selectElement.add(option);
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const results = JSON.parse(sessionStorage.getItem('searchResults'));
+    console.log("success");
+    if (results) {
+        results.forEach(result => {
+            console.log('標題:', result.title);
+            console.log('連結:', result.link);
+        })
+    }
+});

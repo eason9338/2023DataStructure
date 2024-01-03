@@ -7,9 +7,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.springframework.stereotype.Service;
 
-@Service
+
+
 public class WordCounter {
     private String urlStr; // 目標 URL
     private String content; // 存儲 URL 內容

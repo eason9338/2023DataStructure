@@ -1,6 +1,5 @@
 package com.datastructure2023.BackendPractice.service;
 
-import org.springframework.stereotype.Service;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -21,12 +20,10 @@ import com.datastructure2023.BackendPractice.model.WebTree;
 import com.datastructure2023.BackendPractice.model.WebNode;
 import com.datastructure2023.BackendPractice.model.Keyword;
 
-
-@Service
 public class WebCrawler {
 
     private WebTree webTree; // 存儲建立的網頁樹結構
-    private int maxDepth = 1; // 設置最大爬取深度
+    private int maxDepth = 0; // 設置最大爬取深度
     private Set<String> allVisitedUrls; // 存儲所有訪問過的URL
     private ArrayList<Keyword> keywords; // 用於計算分數的關鍵詞列表
     private double scoreThreshold = 100; // 分數門檻

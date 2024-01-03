@@ -1,5 +1,6 @@
 package com.datastructure2023.BackendPractice.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -18,8 +19,8 @@ public class SearchResultHandler {
 
     public GoogleQuery googleQuery;
 
-    public SearchResultHandler(String apiKey, String searchEngineID) {
-        this.googleQuery = new GoogleQuery(apiKey, searchEngineID);
+    public SearchResultHandler() {
+        this.googleQuery = new GoogleQuery("AIzaSyDaMRJAuiClBmf_TatB_3PMtsKqiRt18XM", "e618816a42f6949e9");
     }
 
     public ArrayList<SearchResultItem> search(String query) throws IOException{
