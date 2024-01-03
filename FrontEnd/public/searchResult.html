@@ -8,29 +8,23 @@
     <title>搜尋結果</title>
 </head>
 <body>
-<div class="content-wrapper">
+    <div class="content-wrapper">
         <div class="headBar">
             <div class="search-container">
-                <img src="../picture/small-icon-rmbg.png" class="smallIcon" alt="small-icon">
-                <div class="search-result-group">
-                    <input type="text" class="search-input" placeholder="輸入實習類型">
+                <a href="index.html">
+                    <img src="../picture/small-icon-rmbg.png" class="smallIcon" alt="small-icon">
+                </a>
+                <div class="search-box">
+                    <div class="search-result-group">
+                        <input type="text" class="search-input-type" placeholder="輸入實習類型">
                     <button class="remove-button" onclick="clearSearch()">
                         <img src="../picture/remove-rmbg.png" alt="清除" width="20" height="20">
                     </button>
-                    <button class="search-button" onclick="searchResult()">
-                        <img src="../picture/search-rmbg.png" alt="搜尋" width="20" height="20">
-                    </button>
-                    
+                    </div> 
                 </div>
-                <div class="search-money">
-                    <input type="number" class="searchMny-input" placeholder="最低薪資">
-                    <label for="range"> ~ </label>
-                    <input type="number" class="searchMny-input" placeholder="最高薪資">
-                </div>
-                
                 <div class="search-box">
                     <select id="search-input" onchange="handleRegionChange()">
-                        <option value="" disabled selected>選擇縣市</option>
+                        <option value="" disabled selected>選擇地區</option>
                         <option value="north">北部</option>
                         <option value="central">中部</option>
                         <option value="south">南部</option>
@@ -38,11 +32,20 @@
                         <option value="islands">離島</option>
                     </select>
                     <select id="districtSelect">
-                        <option value="" disabled selected>choose</option>
+                        <option value="" disabled selected>選擇縣市</option>
                     </select>
                 </div>
+                <div class="search-box">
+                    <input type="number" class="search-input" placeholder="最低薪資">
+                    <label for="range"> ~ </label>
+                    <input type="number" class="search-input" placeholder="最高薪資">
+                </div>
+                <button class="search-button" onclick="searchResult()">
+                    <img src="../picture/search-rmbg.png" alt="搜尋" width="20" height="20">
+                </button>
             </div>
         </div>
+        <br>
         <div class="results">
             <div class="result-item">
                 <h2><a href="#">政政小廚師好難吃</a></h2>
@@ -94,4 +97,3 @@
         <button class="search-button" onclick="searchResult()"><img src="../picture/search-removebg.png" alt="搜尋" width=20px height=20px></button>
     </div>
 </div>  -->
-

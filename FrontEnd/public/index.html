@@ -21,17 +21,19 @@
 
             <p>Internship Location</p>
             <div class="search-box">
-                <select class="search-input" id="region">
-                    <option value="" disabled selected>選擇地區</option>
-                    <option value="north">北部</option>
-                    <option value="central">中部</option>
-                    <option value="south">南部</option>
-                    <option value="east">東部</option>
-                    <option value="islands">離島</option>
-                </select>
-                <select class="search-input" id="city" onchange="handleRegionChange()">
-                    <option value="" disabled selected>選擇縣市</option>
-                </select>
+                <div class="search-box">
+                    <select id="search-input" onchange="handleRegionChange()">
+                        <option value="" disabled selected>選擇地區</option>
+                        <option value="north">北部</option>
+                        <option value="central">中部</option>
+                        <option value="south">南部</option>
+                        <option value="east">東部</option>
+                        <option value="islands">離島</option>
+                    </select>
+                    <select id="districtSelect">
+                        <option value="" disabled selected>選擇縣市</option>
+                    </select>
+                </div>
             </div>
             <p>Expected Salary per hour</p>
             <div class="search-box">
