@@ -76,48 +76,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const results = JSON.parse(sessionStorage.getItem('searchResults'));
-    console.log("success");
-    if (results) {
+    const resultsContainer = document.getElementById('searchResultsContainer');
+
+    if (results && resultsContainer) {
         results.forEach(result => {
-            console.log('標題:', result.title);
-            console.log('連結:', result.link);
-        })
+            // 創建一個包含標題和連結的區域
+            const resultItem = document.createElement('div');
+            resultItem.className = 'result-item';
+
+            // 創建標題
+            const titleElement = document.createElement('h2');
+            const titleLink = document.createElement('a');
+            // titleLink.href = result.link;  // 設定連結
+            titleElement.textContent = result.title;  // 設定標題
+            titleElement.appendChild(titleLink);
+
+            // 創建連結
+            const linkElement = document.createElement('a');
+            linkElement.href = result.link;  // 設定連結
+            linkElement.textContent = linkElement.href;  
+
+            resultItem.appendChild(titleElement);
+            resultItem.appendChild(linkElement);
+
+            resultsContainer.appendChild(resultItem);
+        });
     }
 });
-
-function searchResult() {
-    // 重定向到搜索结果介面
-    //window.location.href = '/searchResult';
-}
-
-document.querySelector('.search-button').addEventListener('click', function(){
-    let input = document.querySelector('.search-input').value;
-    console.log('發送請求:', input); // 在發送請求之前打印
-
-    fetch('http://localhost:8080/searchResult', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            input: input
-        })
-    })
-    .then(response => {
-        console.log('收到響應:', response); // 收到響應時打印
-        if (response.ok) {
-            return response.json(); // 確認響應狀態正常後解析 JSON
-        } else {
-            throw new Error('Network response was not ok.');
-        }
-    })
-    .then(data => {
-        console.log('處理數據:', data); // 處理數據時打印
-        sessionStorage.setItem('searchResults', JSON.stringify(data));
-        window.location.href = '/searchResult.html';
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    })
-    
-})
