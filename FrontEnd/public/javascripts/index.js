@@ -110,7 +110,7 @@ function addCityOption(city) {
 document.querySelector('.search-button').addEventListener('click', function(){
     let input = document.querySelector('.search-input').value;
     
-    fetch('http://localhost:8080/add', {
+    fetch('http://localhost:8080/searchResult', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

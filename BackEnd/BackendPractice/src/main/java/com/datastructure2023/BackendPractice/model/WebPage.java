@@ -1,3 +1,7 @@
+package com.datastructure2023.BackendPractice.model;
+
+import com.datastructure2023.BackendPractice.service.WordCounter;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -7,6 +11,7 @@ public class WebPage {
     private WordCounter counter;
 
     // 改成存入 url
+    @Autowired
     public WebPage(String url) {
         this.url = url;
         this.counter = new WordCounter(url);  // 初始化 WordCounter

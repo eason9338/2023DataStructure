@@ -1,14 +1,9 @@
-package com.datastructure2023.BackendPractice;
+package com.datastructure2023.BackendPractice.model;
 
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 public class KeywordList {
 	private ArrayList<Keyword> lst;
@@ -21,9 +16,8 @@ public class KeywordList {
 		while(sc.hasNextLine()) {
 			String keywordName = sc.next();
 			float keywordWeight = sc.nextFloat();
-			Keyword newKeyword = new Keyword(keywordName, keywordWeight);
 
-			//Keyword newKeyword = new Keyword(keywordName, keywordWeight);
+			Keyword newKeyword = new Keyword(keywordName, keywordWeight);
 			lst.add(newKeyword);
 
 		}

@@ -1,18 +1,22 @@
-package com.datastructure2023.BackendPractice;
+package com.datastructure2023.BackendPractice.service;
 
-import java.util.List;
+import com.datastructure2023.BackendPractice.model.WebPage;
 
+import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+
+@Service
 public class WebList {
-    private List<WebPage> webPages;
+    private ArrayList<WebPage> webPages;
 
     // constructor
-    public WebList(List<WebPage> webPages) {
+    public WebList(ArrayList<WebPage> webPages) {
         this.webPages = webPages;
     }
 
     // 對WebPage列表按照分數降序進行排序
     public void sortByScore() {
-        if (webPages != null && webPages.size() > 1) {
+        if (webPages != null && !webPages.isEmpty()) {
             quickSort(0, webPages.size() - 1);
         }
     }
@@ -45,7 +49,6 @@ public class WebList {
         swap(i + 1, high);
         return i + 1;
     }
-    
 
     // 交換WebPage列表中兩個元素的位置
     private void swap(int i, int j) {

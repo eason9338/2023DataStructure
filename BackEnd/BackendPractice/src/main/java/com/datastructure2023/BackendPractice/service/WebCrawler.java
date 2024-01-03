@@ -1,3 +1,7 @@
+package com.datastructure2023.BackendPractice.service;
+
+import org.springframework.stereotype.Service;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -12,7 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
+import com.datastructure2023.BackendPractice.model.WebPage;
+import com.datastructure2023.BackendPractice.model.WebTree;
+import com.datastructure2023.BackendPractice.model.WebNode;
+import com.datastructure2023.BackendPractice.model.Keyword;
 
+
+@Service
 public class WebCrawler {
 
     private WebTree webTree; // 存儲建立的網頁樹結構
