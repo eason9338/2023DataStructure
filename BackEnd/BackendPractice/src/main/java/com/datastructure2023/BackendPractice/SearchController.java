@@ -13,6 +13,7 @@ import com.datastructure2023.BackendPractice.model.Keyword;
 import com.datastructure2023.BackendPractice.model.SearchResultItem;
 import com.datastructure2023.BackendPractice.model.WebPage;
 import com.datastructure2023.BackendPractice.model.WebTree;
+import com.datastructure2023.BackendPractice.model.Keyword;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,23 +30,31 @@ public class SearchController {
     @PostMapping("/searchResult")
     public ResponseEntity<?> search(@RequestBody String query) {
         try {
-            ArrayList<Keyword> keywordList = new ArrayList<Keyword>();
+            ArrayList<Keyword> keywordList = new ArrayList<>();
 
-            try {
-                Resource resource = new ClassPathResource("Keyword.txt");
-                InputStream inputStream = resource.getInputStream();
-                Scanner sc = new Scanner(inputStream);
-                while (sc.hasNext()) {
-                    String name = sc.next();
-                    float weight = Float.parseFloat(sc.next());
-                    Keyword newKeyword = new Keyword(name, weight);
-                    keywordList.add(newKeyword);
-                }
-                sc.close();
-            } catch (IOException e) {
-                System.out.println("找不到文件");
-            }
-
+            //Add keywords and their weights to the list
+            keywordList.add(new Keyword("實習", 0.9f));
+            keywordList.add(new Keyword("實習生", 0.9f));
+            keywordList.add(new Keyword("大一", 0.2f));
+            keywordList.add(new Keyword("大二", 0.4f));
+            keywordList.add(new Keyword("大三", 0.6f));
+            keywordList.add(new Keyword("大四", 0.8f));
+            keywordList.add(new Keyword("碩一", 0.9f));
+            keywordList.add(new Keyword("碩二", 1.0f));
+            keywordList.add(new Keyword("應屆畢業生", 1.0f));
+            keywordList.add(new Keyword("兼職", 0.5f));
+            keywordList.add(new Keyword("轉正職機會", 0.7f));
+            keywordList.add(new Keyword("不限年資", 0.6f));
+            keywordList.add(new Keyword("不需負擔管理責任", 0.8f));
+            keywordList.add(new Keyword("職缺", 0.9f));
+            keywordList.add(new Keyword("薪水", 0.3f));
+            keywordList.add(new Keyword("勞保", 0.3f));
+            keywordList.add(new Keyword("勞工保險", 0.3f));
+            keywordList.add(new Keyword("短期實習", 0.7f));
+            keywordList.add(new Keyword("面試", 0.6f));
+            keywordList.add(new Keyword("長期實習", 0.7f));
+            keywordList.add(new Keyword("培訓", 0.6f));
+            
             SearchResultHandler searchResultHandler = new SearchResultHandler();
             ArrayList<SearchResultItem> results = searchResultHandler.search("實習");
 
@@ -68,7 +77,7 @@ public class SearchController {
                 }
                 // 獲取計算後的總分
                 double totalScore = Math.round(webTree.getTotalScore() * 10.0) / 10.0;
-                //System.out.println("總分: " + totalScore);
+                System.out.println("總分: " + totalScore);
 
                 highScorePages.addAll(webTree.getHighScorePages(300, webTree.root));
             }
