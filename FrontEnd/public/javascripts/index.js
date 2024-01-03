@@ -75,6 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
 document.querySelector('.search-button').addEventListener('click', function(){
     let input = document.querySelector('.search-input').value;
+    let region = document.querySelector('#search-input').value;
+    let lowSalary = document.querySelector('#first-num').value;
+    let highSalary = document.querySelector('#second-num').value;
     console.log('發送請求:', input); // 在發送請求之前打印
 
     fetch('http://localhost:8080/searchResult', {
@@ -83,7 +86,10 @@ document.querySelector('.search-button').addEventListener('click', function(){
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            input: input
+            input: input,
+            region: region,
+            lowSalary: lowSalary,
+            highSalary: highSalary
         })
     })
     .then(response => {
