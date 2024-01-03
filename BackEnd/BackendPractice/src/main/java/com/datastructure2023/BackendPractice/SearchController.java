@@ -91,8 +91,8 @@ public class SearchController {
             highScoreList.sortByScore();
 
             ArrayList<SearchResultItem> finalResults = new ArrayList<>();
-            finalResults.addAll(processWebPages(highScorePages, "以下為高分子網頁:"));
-            finalResults.addAll(processWebPages(webPages, "以下為一般網頁"));
+            finalResults.addAll(processWebPages(highScorePages, "以下為高分子網頁:", results));
+            finalResults.addAll(processWebPages(webPages, "以下為一般網頁", results));
             System.out.println(finalResults); // 打印 finalResults 檢查內容
             return ResponseEntity.ok(finalResults);
         } catch (IOException e) {
@@ -100,7 +100,7 @@ public class SearchController {
         }
     }
 
-    private ArrayList<SearchResultItem> processWebPages(ArrayList<WebPage> webPages, String header) {
+    private ArrayList<SearchResultItem> processWebPages(ArrayList<WebPage> webPages, String header, ArrayList<SearchResultItem> results) {
         System.out.println(header);
         ArrayList<SearchResultItem> resultsAfterSort = new ArrayList<>();
 
@@ -113,8 +113,18 @@ public class SearchController {
                 title = doc.title();
             } catch (IOException e) {
                 System.err.println("存取URL時發生錯誤: " + e.getMessage());
-                title = "無法取得標題";
-            }
+                boolean found = false;
+                for (SearchResultItem item : results) {
+                    if (item.getLink().equals(url)) {
+                        title = item.getTitle();
+                        found = true;
+                        break;
+                    }
+                }
+    
+                if (!found) {
+                    title = "無法取得標題"; // 如果在 results 中也找不到標題
+                }            }
 
             SearchResultItem item = new SearchResultItem(title, url);
             resultsAfterSort.add(item);
