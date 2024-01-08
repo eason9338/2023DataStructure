@@ -84,7 +84,7 @@ public class SearchController {
             keywordList.add(new Keyword("培訓", 0.6f));
             
             SearchResultHandler searchResultHandler = new SearchResultHandler();
-            ArrayList<SearchResultItem> results = searchResultHandler.search(request.getInput() + "實習");
+            ArrayList<SearchResultItem> results = searchResultHandler.search(request.getInput() + "實習" + request.getRegion());
 
             ArrayList<WebPage> webPages = new ArrayList<WebPage>();
             ArrayList<WebPage> highScorePages = new ArrayList<WebPage>(); // 存儲分數高於閾值的頁面
