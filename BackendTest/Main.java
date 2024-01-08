@@ -41,72 +41,58 @@ public class Main {
         WebList webList = new WebList(webPages);
         WebList highScoreList = new WebList(highScorePages);
 
+        // 存儲所有子節點 URL 的列表
+        ArrayList<String> allChildrenUrls = new ArrayList<>();
+        
         for(WebPage w: webPages){
             WebCrawler webCrawler = new WebCrawler(w.getUrl(), keywordList);
-           
-            // 獲取建立的 WebTree
             WebTree webTree = webCrawler.getWebTree();
 
-            // 使用 WebTree 中的方法計算分數
+            // 計算每個頁面的分數
             try {
                 webTree.setPostOrderScore(keywordList);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            // 獲取計算後的總分
-            double totalScore = Math.round(webTree.getTotalScore() * 10.0) / 10.0;
-            //System.out.println("總分: " + totalScore);
 
-            highScorePages.addAll(webTree.getHighScorePages(300, webTree.root));
+            // 為每個 SearchResultItem 設置子節點
+            for (SearchResultItem resultItem : results) {
+                if (resultItem.getLink().equals(w.getUrl())) {
+                    ArrayList<String> childrenUrls = webTree.root.getChildren();
+                    resultItem.setChild(childrenUrls);
+                    allChildrenUrls.addAll(childrenUrls); // 將子節點 URL 添加到總列表中
+                    break;
+                }
+            }
         }
-        // 對 WebList 實例進行排序
-        webList.sortByScore();
-        highScoreList.sortByScore();
 
-        processWebPages(highScorePages, "以下為高分子網頁:",results);
-        processWebPages(webPages, "以下為一般網頁",results);
+        // 對結果進行處理並顯示
+        processWebPages(highScorePages, "以下為高分子網頁:", results, allChildrenUrls);
+        processWebPages(webPages, "以下為一般網頁", results, allChildrenUrls);
         //把一開始googlesearch到的array加到最後
     }
 
-    //下面是改了的method
-    private static void processWebPages(ArrayList<WebPage> webPages, String header, ArrayList<SearchResultItem> results) {
+    private static void processWebPages(ArrayList<WebPage> webPages, String header, ArrayList<SearchResultItem> results, ArrayList<String> childrenUrls) {
         System.out.println(header);
-        ArrayList<SearchResultItem> resultsAfterSort = new ArrayList<>();
-    
-        for (WebPage w : webPages) {
-            String url = w.getUrl();
-            String title = "";
-    
-            try {
-                Document doc = Jsoup.connect(url).get();
-                title = doc.title();
-            } catch (IOException e) {
-                System.err.println("存取URL時發生錯誤: " + e.getMessage());
-    
-                // 在 results 中查找相應的標題
-                boolean found = false;
-                for (SearchResultItem item : results) {
-                    if (item.getLink().equals(url)) {
-                        title = item.getTitle();
-                        found = true;
-                        break;
-                    }
-                }
-    
-                if (!found) {
-                    title = "無法取得標題"; // 如果在 results 中也找不到標題
-                }
-            }
-    
-            SearchResultItem item = new SearchResultItem(title, url);
-            resultsAfterSort.add(item);
-        }
-    
-        for (SearchResultItem item : resultsAfterSort) {
+        
+        for (SearchResultItem item : results) {
             System.out.println("標題: " + item.getTitle());
             System.out.println("連結: " + item.getLink());
+
+            // 打印子節點 URL
+            if (item.getChildren() != null) {
+                for (String childUrl : item.getChildren()) {
+                    System.out.println("子節點 URL: " + childUrl);
+                }
+            }
+
             System.out.println(); // 增加一個空白行以分隔不同的結果
         }
+
+        // 打印所有子節點的 URL
+        System.out.println("所有子節點 URL:");
+        for (String childUrl : childrenUrls) {
+            System.out.println(childUrl);
+        }
     }
-    
 }

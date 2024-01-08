@@ -16,6 +16,26 @@ public class WebNode {
         this.children = new ArrayList<>();
     }
 
+    public String getUrl() {
+        return webPage.getUrl();
+    }
+
+    //return 3個子網頁
+    public ArrayList<String> getChildren() {
+        ArrayList<String> firstThreeChildren= new ArrayList<>();
+        int count = 0;
+
+        for (WebNode child : this.children) {
+            if (count >= 3) {
+                break;
+            }
+            firstThreeChildren.add(child.webPage.getUrl());
+            count++;
+        }
+
+        return firstThreeChildren;
+    }
+
     // 根據關鍵字列表計算節點分數
     public void setNodeScore(ArrayList<Keyword> keywords) throws IOException {
         // 根據關鍵字設置當前網頁的分數
