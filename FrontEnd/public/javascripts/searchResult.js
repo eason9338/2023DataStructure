@@ -132,10 +132,16 @@ document.addEventListener('DOMContentLoaded', () => {
             // 創建連結
             const linkElement = document.createElement('a');
             linkElement.href = result.link;  // 設定連結
-            linkElement.textContent = linkElement.href;  
+            linkElement.innerText = "連結："+linkElement.href;  
+
+            //創建子網頁連結
+            const linkChildElement = document.createElement('a');
+            linkChildElement.href = result.children;
+            linkChildElement.textContent = "子網頁連結："+linkChildElement.href;
 
             resultItem.appendChild(titleElement);
             resultItem.appendChild(linkElement);
+            resultItem.appendChild(linkChildElement);
 
             resultsContainer.appendChild(resultItem);
         });
