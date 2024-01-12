@@ -107,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         results.forEach(result => {
             console.log('標題:', result.title);
             console.log('連結:', result.link);
+            console.log('子網頁:', result.children);
         })
     }
 });

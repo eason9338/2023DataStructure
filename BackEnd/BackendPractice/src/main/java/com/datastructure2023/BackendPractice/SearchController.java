@@ -89,15 +89,20 @@ public class SearchController {
             ArrayList<WebPage> webPages = new ArrayList<WebPage>();
             ArrayList<WebPage> highScorePages = new ArrayList<WebPage>(); // 存儲分數高於閾值的頁面
 
-
+            ArrayList<String> allChildrenUrls = new ArrayList<>();
+            
             for(SearchResultItem result: results) {
                 String url = result.getLink();
                 WebPage page = new WebPage(url);
                 webPages.add(page);
 
-                WebCrawler webCrawler = new WebCrawler(url, keywordList);
-                 WebTree webTree = webCrawler.getWebTree();
 
+                WebCrawler webCrawler = new WebCrawler(url, keywordList);
+                WebTree webTree = webCrawler.getWebTree();
+
+                ArrayList<String> childrenUrls = webTree.root.getChildren();
+                result.setChild(childrenUrls);
+                allChildrenUrls.addAll(childrenUrls); // 將子節點 URL 添加到總列表中
                 // 使用 WebTree 中的方法計算分數
                 try {
                     webTree.setPostOrderScore(keywordList);
@@ -120,19 +125,18 @@ public class SearchController {
             highScoreList.sortByScore();
 
             ArrayList<SearchResultItem> finalResults = new ArrayList<>();
-            finalResults.addAll(processWebPages(highScorePages, "以下為高分子網頁:", results));
-            finalResults.addAll(processWebPages(webPages, "以下為一般網頁", results));
-            System.out.println(finalResults); // 打印 finalResults 檢查內容
+            finalResults.addAll(processWebPages(highScorePages, "以下為高分子網頁:", results, allChildrenUrls));
+            finalResults.addAll(processWebPages(webPages, "以下為一般網頁", results, allChildrenUrls));
             return ResponseEntity.ok(finalResults);
         } catch (IOException e) {
             return ResponseEntity.internalServerError().body("搜尋時發生錯誤: " + e.getMessage());
         }
     }
 
-    private ArrayList<SearchResultItem> processWebPages(ArrayList<WebPage> webPages, String header, ArrayList<SearchResultItem> results) {
+    private ArrayList<SearchResultItem> processWebPages(ArrayList<WebPage> webPages, String header, ArrayList<SearchResultItem> results, ArrayList<String> allChildUrl) {
         System.out.println(header);
         ArrayList<SearchResultItem> resultsAfterSort = new ArrayList<>();
-
+        int count = 0;
         for (WebPage w : webPages) {
             String url = w.getUrl();
             String title = "";
@@ -157,12 +161,15 @@ public class SearchController {
             }
 
             SearchResultItem item = new SearchResultItem(title, url);
+            item.setChild(allChildUrl.get(count));
+            count ++;
             resultsAfterSort.add(item);
         }
 
         for (SearchResultItem item : resultsAfterSort) {
             System.out.println("標題: " + item.getTitle());
             System.out.println("連結: " + item.getLink());
+            System.out.println("子網頁: " + item.getChildren());
             System.out.println(); // 增加一個空白行以分隔不同的結果
         }
         System.out.println("完成");
