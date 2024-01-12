@@ -134,14 +134,21 @@ document.addEventListener('DOMContentLoaded', () => {
             linkElement.href = result.link;  // 設定連結
             linkElement.innerText = "連結："+linkElement.href;  
 
-            //創建子網頁連結
-            const linkChildElement = document.createElement('a');
-            linkChildElement.href = result.children;
-            linkChildElement.textContent = "子網頁連結："+linkChildElement.href;
-
             resultItem.appendChild(titleElement);
             resultItem.appendChild(linkElement);
-            resultItem.appendChild(linkChildElement);
+            
+            if (result.children) {
+                const childrenContainer = document.createElement('div');
+                result.children.forEach(childUrl => {
+                    const childLink = document.createElement('a');
+                    childLink.href = childUrl;
+                    childLink.textContent = "子網頁連結: " + childUrl;
+                    childLink.target = "_blank"; // 在新標籤頁打開連結
+                    childrenContainer.appendChild(childLink);
+                    childrenContainer.appendChild(document.createElement('br')); // 每個連結後添加換行
+                });
+                resultItem.appendChild(childrenContainer); // 添加子連結容器到結果項目
+            }
 
             resultsContainer.appendChild(resultItem);
         });
